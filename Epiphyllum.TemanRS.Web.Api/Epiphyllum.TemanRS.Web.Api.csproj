@@ -19,4 +19,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Common\Epiphyllum.TemanRS.Common.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Models\Epiphyllum.TemanRS.Models.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Repositories\Epiphyllum.TemanRS.Repositories.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Services\Epiphyllum.TemanRS.Services.csproj" />
+  </ItemGroup>
+
 </Project>

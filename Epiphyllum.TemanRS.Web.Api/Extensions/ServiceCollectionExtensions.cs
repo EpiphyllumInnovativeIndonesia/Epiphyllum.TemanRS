@@ -19,9 +19,10 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
     {
         public static void ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.ConfigureMvc();
             services.ConfigureAppSettings(configuration);
-            services.ConfigureDbContext(configuration);
+            services.ConfigureMvc();
+            services.ConfigureDbContext();
+            services.ConfigureIoC();
         }
 
         private static void ConfigureMvc(this IServiceCollection services)
@@ -35,11 +36,20 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         {
             services.Configure<StartupViewModel>(configuration.GetSection("Startup"));
             services.Configure<ConnectionStrings>(configuration.GetSection("ConnectionStrings"));
+            services.AddSingleton(provider => provider.GetService<IOptions<StartupViewModel>>().Value);
+            services.AddSingleton(provider => provider.GetService<IOptions<ConnectionStrings>>().Value);
         }
 
-        private static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
+        private static void ConfigureIoC(this IServiceCollection services)
         {
-            services.AddDbContext<TemanRSContext>(options => options.UseSqlServer(configuration.GetConnectionString("Master")));
+        }
+        
+        private static void ConfigureDbContext(this IServiceCollection services)
+        {
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+            ConnectionStrings connectionStrings = serviceProvider.GetService<ConnectionStrings>();
+
+            services.AddDbContext<TemanRSContext>(options => options.UseSqlServer(connectionStrings.Master));
         }
     }
 }

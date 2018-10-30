@@ -23,7 +23,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             {
                 string commonPath = Path.Combine(env.ContentRootPath, "..", "Epiphyllum.TemanRS.Common");
                 configurationBuilder = configurationBuilder
-                    .AddJsonFile($"{commonPath}/ConnectionStrings.json", optional: false, reloadOnChange: true);
+                    .AddJsonFile($"{commonPath}/ConnectionStrings.json", optional: false, reloadOnChange: false);
             }
             else
             {

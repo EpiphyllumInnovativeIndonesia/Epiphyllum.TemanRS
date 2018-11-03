@@ -7,8 +7,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Epiphyllum.TemanRS.Web.Api.Extensions.Localization
 {
+    /// <summary>
+    /// Default localization provider.
+    /// Get culture info from "appsettings.json" in directory.
+    /// </summary>
     public class DefaultLocalizationProvider : RequestCultureProvider
     {
+        /// <summary>
+        /// Determining custom culture result.
+        /// </summary>
+        /// <param name="httpContext">Inject HttpContext.</param>
+        /// <returns>Task<ProviderCultureResult></returns>
         public override Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
         {
             if (httpContext == null)

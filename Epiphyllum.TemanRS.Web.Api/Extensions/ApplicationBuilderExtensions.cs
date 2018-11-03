@@ -10,8 +10,16 @@ using Microsoft.AspNetCore.Localization;
 
 namespace Epiphyllum.TemanRS.Web.Api.Extensions
 {
+    /// <summary>
+    /// Custom application builder extensions.
+    /// </summary>
     public static class ApplicationBuilderExtensions
     {
+        /// <summary>
+        /// Configure custom application builder.
+        /// </summary>
+        /// <param name="app">IApplicationBuilder.</param>
+        /// <param name="env">IHostingEnvironment.</param>
         public static void ConfigureApplicationBuilder(this IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -28,6 +36,10 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             app.UseMvc();
         }
 
+        /// <summary>
+        /// Configure custom application localization.
+        /// </summary>
+        /// <param name="app">IApplicationBuilder.</param>
         public static void ConfigureAppLocalization(this IApplicationBuilder app)
         {
             IList<CultureInfo> supportedCultures = new List<CultureInfo>

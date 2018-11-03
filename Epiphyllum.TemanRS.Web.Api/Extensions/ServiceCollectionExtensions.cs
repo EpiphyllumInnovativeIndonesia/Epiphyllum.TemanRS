@@ -15,8 +15,16 @@ using System.Threading.Tasks;
 
 namespace Epiphyllum.TemanRS.Web.Api.Extensions
 {
+    /// <summary>
+    /// Custom service collection extensions.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Configure custom application services.
+        /// </summary>
+        /// <param name="services">IServiceCollection.</param>
+        /// <param name="configuration">IConfiguration.</param>
         public static void ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.ConfigureAppSettings(configuration);
@@ -25,27 +33,44 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             services.ConfigureLocalization();
         }
 
-        private static void ConfigureAppSettings(this IServiceCollection services, IConfiguration configuration)
+        /// <summary>
+        /// Configure appsettings services.
+        /// </summary>
+        /// <param name="services">IServiceCollection.</param>
+        /// <param name="configuration">IConfiguration.</param>
+        public static void ConfigureAppSettings(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<ConnectionStrings>(configuration.GetSection("ConnectionStrings"));
             services.AddSingleton(provider => provider.GetService<IOptions<ConnectionStrings>>().Value);
         }
 
-        private static void ConfigureMvc(this IServiceCollection services)
+        /// <summary>
+        /// Configure mvc services.
+        /// </summary>
+        /// <param name="services">IServiceCollection.</param>
+        public static void ConfigureMvc(this IServiceCollection services)
         {
             IMvcBuilder mvcBuilder = services.AddMvc();
             mvcBuilder.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
-        private static void ConfigureDbContext(this IServiceCollection services)
+        /// <summary>
+        /// Configure database context services.
+        /// </summary>
+        /// <param name="services">IServiceCollection.</param>
+        public static void ConfigureDbContext(this IServiceCollection services)
         {
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             ConnectionStrings connectionStrings = serviceProvider.GetService<ConnectionStrings>();
             services.AddDbContext<TemanRSContext>(options => options.UseSqlServer(connectionStrings.Master));
         }
 
-        private static void ConfigureLocalization(this IServiceCollection services)
+        /// <summary>
+        /// Configure localization services.
+        /// </summary>
+        /// <param name="services">IServiceCollection.</param>
+        public static void ConfigureLocalization(this IServiceCollection services)
         {
             services.AddLocalization();
         }

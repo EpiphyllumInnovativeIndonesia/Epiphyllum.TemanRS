@@ -5,8 +5,17 @@ using Microsoft.AspNetCore.Localization;
 
 namespace Epiphyllum.TemanRS.Web.Api.Extensions.Localization
 {
+    /// <summary>
+    /// User localization provider.
+    /// Get culture info from authenticated user.
+    /// </summary>
     public class UserLocalizationProvider : RequestCultureProvider
     {
+        /// <summary>
+        /// Determining custom culture result.
+        /// </summary>
+        /// <param name="httpContext">Inject HttpContext.</param>
+        /// <returns>Task<ProviderCultureResult></returns>
         public override Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
         {
             if (httpContext == null)

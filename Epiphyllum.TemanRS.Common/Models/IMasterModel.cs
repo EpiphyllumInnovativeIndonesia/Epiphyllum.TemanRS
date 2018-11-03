@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Epiphyllum.TemanRS.Common.Models
 {
+    /// <summary>
+    /// Master model interface inherit from base model interface.
+    /// </summary>
     public interface IMasterModel : IBaseModel
     {
         bool IsDeleted { get; set; }

@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace Epiphyllum.TemanRS.Web.Api.Extensions
 {
+    /// <summary>
+    /// Custom hosting environment extensions.
+    /// </summary>
     public static class HostingEnvironmentExtensions
     {
+        /// <summary>
+        /// Build custom configuration.
+        /// </summary>
+        /// <param name="env">IHostingEnvironment.</param>
+        /// <returns>IConfiguration.</returns>
         public static IConfiguration BuildConfiguration(this IHostingEnvironment env)
         {
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();

@@ -1,7 +1,7 @@
-﻿using Epiphyllum.TemanRS.Services.ViewModels;
+﻿using Epiphyllum.TemanRS.Common.Localization.Message;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Localization;
 
 namespace Epiphyllum.TemanRS.Web.Api.Controllers
 {
@@ -9,17 +9,17 @@ namespace Epiphyllum.TemanRS.Web.Api.Controllers
     [AllowAnonymous]
     public class IndexController : ControllerBase
     {
-        private readonly StartupViewModel _startupViewModel;
+        private readonly IStringLocalizer<StartupMessage> _localizer;
 
-        public IndexController(IOptionsSnapshot<StartupViewModel> startupViewModel)
+        public IndexController(IStringLocalizer<StartupMessage> localizer)
         {
-            _startupViewModel = startupViewModel.Value;
+            _localizer = localizer;
         }
 
         [HttpGet]
         public string Get()
         {
-            return _startupViewModel.Message;
+            return _localizer[StartupMessage.Hello];
         }
     }
 }

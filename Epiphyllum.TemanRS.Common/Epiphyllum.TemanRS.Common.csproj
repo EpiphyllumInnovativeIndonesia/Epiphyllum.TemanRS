@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Localization\Message\StartupMessage.en-US.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Message\StartupMessage.id-ID.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="ConnectionStrings.example.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

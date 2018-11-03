@@ -1,6 +1,6 @@
 ﻿using Epiphyllum.TemanRS.Common.Configuration;
 using Epiphyllum.TemanRS.Models;
-using Epiphyllum.TemanRS.Services.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +22,13 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             services.ConfigureAppSettings(configuration);
             services.ConfigureMvc();
             services.ConfigureDbContext();
-            services.ConfigureIoC();
+            services.ConfigureLocalization();
+        }
+
+        private static void ConfigureAppSettings(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<ConnectionStrings>(configuration.GetSection("ConnectionStrings"));
+            services.AddSingleton(provider => provider.GetService<IOptions<ConnectionStrings>>().Value);
         }
 
         private static void ConfigureMvc(this IServiceCollection services)
@@ -32,24 +38,16 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
-        private static void ConfigureAppSettings(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.Configure<StartupViewModel>(configuration.GetSection("Startup"));
-            services.Configure<ConnectionStrings>(configuration.GetSection("ConnectionStrings"));
-            services.AddSingleton(provider => provider.GetService<IOptions<StartupViewModel>>().Value);
-            services.AddSingleton(provider => provider.GetService<IOptions<ConnectionStrings>>().Value);
-        }
-
-        private static void ConfigureIoC(this IServiceCollection services)
-        {
-        }
-        
         private static void ConfigureDbContext(this IServiceCollection services)
         {
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             ConnectionStrings connectionStrings = serviceProvider.GetService<ConnectionStrings>();
-
             services.AddDbContext<TemanRSContext>(options => options.UseSqlServer(connectionStrings.Master));
+        }
+
+        private static void ConfigureLocalization(this IServiceCollection services)
+        {
+            services.AddLocalization();
         }
     }
 }

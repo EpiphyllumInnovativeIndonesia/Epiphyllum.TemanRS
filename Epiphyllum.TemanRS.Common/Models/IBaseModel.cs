@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Epiphyllum.TemanRS.Common.Models
+﻿namespace Epiphyllum.TemanRS.Common.Models
 {
     /// <summary>
     /// Base model interface.

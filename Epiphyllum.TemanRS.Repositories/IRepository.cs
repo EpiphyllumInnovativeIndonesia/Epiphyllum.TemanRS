@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Epiphyllum.TemanRS.Repositories
 {
@@ -12,11 +10,19 @@ namespace Epiphyllum.TemanRS.Repositories
     /// Generic repository interface.
     /// </summary>
     /// <typeparam name="T">Database object.</typeparam>
-    /// <typeparam name="U">Database context.</typeparam>
-    public interface IRepository<T, U>
+    public interface IRepository<T>
         where T : class
-        where U : DbContext
     {
+        /// <summary>
+        /// Gets a table
+        /// </summary>
+        IQueryable<T> Table { get; }
+
+        /// <summary>
+        /// Gets a table with "no tracking" enabled (EF feature) Use it only when you load record(s) only for read-only operations
+        /// </summary>
+        IQueryable<T> TableNoTracking { get; }
+
         /// <summary>
         /// Select all objects.
         /// </summary>
@@ -103,11 +109,5 @@ namespace Epiphyllum.TemanRS.Repositories
         /// <param name="objects"><typeparamref name="T"/> object params.</param>
         /// <returns>Task</returns>
         Task Delete(params T[] objects);
-
-        /// <summary>
-        /// Save changes.
-        /// </summary>
-        /// <returns>Task</returns>
-        Task Save();
     }
 }

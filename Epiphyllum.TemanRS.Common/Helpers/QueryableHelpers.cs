@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 
 namespace Epiphyllum.TemanRS.Common.Helpers
@@ -19,12 +17,14 @@ namespace Epiphyllum.TemanRS.Common.Helpers
         /// <param name="dbQuery">IQueryable entity framework objects.</param>
         /// <param name="navigationProperties">Object params navigation property of entity framework object.</param>
         /// <returns>IQueryable<typeparamref name="T"/></returns>
-        public static IQueryable<T> Include<T>(this IQueryable<T> dbQuery,
+        public static IQueryable<T> IncludeProperties<T>(this IQueryable<T> dbQuery,
             params Expression<Func<T, object>>[] navigationProperties)
             where T : class
         {
-            dbQuery = navigationProperties
-                .Aggregate(dbQuery, (current, navigarionProperty) => current.Include(navigarionProperty));
+            foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+            {
+                dbQuery = dbQuery.Include(navigationProperty);
+            }
             return dbQuery;
         }
 
@@ -35,12 +35,14 @@ namespace Epiphyllum.TemanRS.Common.Helpers
         /// <param name="dbQuery">IQueryable entity framework objects.</param>
         /// <param name="navigationProperties">String params navigation property of entity framework object.</param>
         /// <returns>IQueryable<typeparamref name="T"/></returns>
-        public static IQueryable<T> Include<T>(this IQueryable<T> dbQuery,
+        public static IQueryable<T> IncludeProperties<T>(this IQueryable<T> dbQuery,
             params string[] navigationProperties)
             where T : class
         {
-            dbQuery = navigationProperties
-                .Aggregate(dbQuery, (current, navigarionProperty) => current.Include(navigarionProperty));
+            foreach (string navigationProperty in navigationProperties)
+            {
+                dbQuery = dbQuery.Include(navigationProperty);
+            }
             return dbQuery;
         }
     }

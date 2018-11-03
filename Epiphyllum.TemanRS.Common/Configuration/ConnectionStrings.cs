@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Epiphyllum.TemanRS.Common.Configuration
+﻿namespace Epiphyllum.TemanRS.Common.Configuration
 {
     /// <summary>
     /// Connection strings class.

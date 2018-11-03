@@ -1,8 +1,7 @@
-﻿using Epiphyllum.TemanRS.Common.Configuration;
+﻿using System;
+using Epiphyllum.TemanRS.Common.Configuration;
 using Epiphyllum.TemanRS.Models;
 using Epiphyllum.TemanRS.Repositories;
-using Epiphyllum.TemanRS.Repositories.Master;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,11 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Epiphyllum.TemanRS.Web.Api.Extensions
 {
@@ -74,7 +68,6 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             services.AddDbContext<TemanRSContext>(options =>
             {
                 options.UseSqlServer(connectionStrings.Master);
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
         }
 
@@ -93,8 +86,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <param name="services">IServiceCollection.</param>
         public static void ConfigureIoC(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IDbContext, TemanRSContext>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
     }
 }

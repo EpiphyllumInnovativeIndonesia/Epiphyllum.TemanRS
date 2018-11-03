@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Epiphyllum.TemanRS.Models;
-using Epiphyllum.TemanRS.Repositories.Master;
+using Epiphyllum.TemanRS.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Epiphyllum.TemanRS.Web.Api.Controllers.Master
@@ -13,9 +10,9 @@ namespace Epiphyllum.TemanRS.Web.Api.Controllers.Master
     [AllowAnonymous]
     public class DepartmentController : ControllerBase
     {
-        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IRepository<Department> _departmentRepository;
 
-        public DepartmentController(IDepartmentRepository departmentRepository)
+        public DepartmentController(IRepository<Department> departmentRepository)
         {
             _departmentRepository = departmentRepository;
         }
@@ -29,7 +26,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Controllers.Master
         [HttpGet("{id}")]
         public async Task<Department> Get(int id)
         {
-            return await _departmentRepository.SelectById(id);
+            return await _departmentRepository.Select(prop => prop.Id.Equals(id));
         }
 
         [HttpPost]
@@ -49,7 +46,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Controllers.Master
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _departmentRepository.Delete(id);
+            Department department = new Department();
+            await _departmentRepository.Update(department);
             return Ok();
         }
     }

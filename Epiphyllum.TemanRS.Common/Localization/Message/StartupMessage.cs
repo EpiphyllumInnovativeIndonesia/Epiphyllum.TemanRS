@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Epiphyllum.TemanRS.Common.Localization.Message
+﻿namespace Epiphyllum.TemanRS.Common.Localization.Message
 {
     /// <summary>
     /// A startup message use for localizer.

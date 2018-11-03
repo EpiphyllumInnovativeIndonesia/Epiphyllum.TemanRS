@@ -5,12 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Localization\Message\StartupMessage.en-US.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Localization\Message\StartupMessage.id-ID.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>

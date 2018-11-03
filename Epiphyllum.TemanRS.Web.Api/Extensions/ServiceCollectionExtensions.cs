@@ -1,11 +1,14 @@
 ﻿using Epiphyllum.TemanRS.Common.Configuration;
 using Epiphyllum.TemanRS.Models;
+using Epiphyllum.TemanRS.Repositories;
+using Epiphyllum.TemanRS.Repositories.Master;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -31,6 +34,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             services.ConfigureMvc();
             services.ConfigureDbContext();
             services.ConfigureLocalization();
+            services.ConfigureIoC();
         }
 
         /// <summary>
@@ -52,7 +56,11 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         {
             IMvcBuilder mvcBuilder = services.AddMvc();
             mvcBuilder.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            mvcBuilder.AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
         }
 
         /// <summary>
@@ -63,7 +71,11 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         {
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             ConnectionStrings connectionStrings = serviceProvider.GetService<ConnectionStrings>();
-            services.AddDbContext<TemanRSContext>(options => options.UseSqlServer(connectionStrings.Master));
+            services.AddDbContext<TemanRSContext>(options =>
+            {
+                options.UseSqlServer(connectionStrings.Master);
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            });
         }
 
         /// <summary>
@@ -73,6 +85,16 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         public static void ConfigureLocalization(this IServiceCollection services)
         {
             services.AddLocalization();
+        }
+
+        /// <summary>
+        /// Configure inversion of control.
+        /// </summary>
+        /// <param name="services">IServiceCollection.</param>
+        public static void ConfigureIoC(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         }
     }
 }

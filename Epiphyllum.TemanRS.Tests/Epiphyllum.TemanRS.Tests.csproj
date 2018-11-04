@@ -7,9 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.1.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Common\Epiphyllum.TemanRS.Common.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Models\Epiphyllum.TemanRS.Models.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Repositories\Epiphyllum.TemanRS.Repositories.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Services\Epiphyllum.TemanRS.Services.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Web.Api\Epiphyllum.TemanRS.Web.Api.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Web.App\Epiphyllum.TemanRS.Web.App.csproj" />
   </ItemGroup>
 
 </Project>

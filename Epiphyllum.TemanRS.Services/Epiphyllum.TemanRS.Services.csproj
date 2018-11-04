@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Common\Epiphyllum.TemanRS.Common.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Models\Epiphyllum.TemanRS.Models.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Repositories\Epiphyllum.TemanRS.Repositories.csproj" />
+  </ItemGroup>
+
 </Project>

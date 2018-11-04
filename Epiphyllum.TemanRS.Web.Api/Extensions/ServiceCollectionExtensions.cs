@@ -2,6 +2,8 @@
 using Epiphyllum.TemanRS.Common.Configuration;
 using Epiphyllum.TemanRS.Models;
 using Epiphyllum.TemanRS.Repositories;
+using Epiphyllum.TemanRS.Repositories.Master;
+using Epiphyllum.TemanRS.Services.Master;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -86,8 +88,15 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <param name="services">IServiceCollection.</param>
         public static void ConfigureIoC(this IServiceCollection services)
         {
+            // Add DbContext
             services.AddScoped<IDbContext, TemanRSContext>();
+
+            // Add Repository
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            // Add Service
+            services.AddScoped<IDepartmentService, DepartmentService>();
         }
     }
 }

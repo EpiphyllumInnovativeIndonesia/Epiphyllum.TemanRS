@@ -131,7 +131,7 @@ namespace Epiphyllum.TemanRS.Repositories
         {
             IQueryable<T> dbQuery = _dbSet;
             dbQuery = dbQuery.Where(predicate);
-            return await dbQuery.FirstOrDefaultAsync();
+            return await dbQuery.SingleOrDefaultAsync();
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Epiphyllum.TemanRS.Repositories
             IQueryable<T> dbQuery = _dbSet;
             dbQuery = dbQuery.IncludeProperties(navigationProperties);
             dbQuery = dbQuery.Where(predicate);
-            return await dbQuery.FirstOrDefaultAsync();
+            return await dbQuery.SingleOrDefaultAsync();
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Epiphyllum.TemanRS.Repositories
             IQueryable<T> dbQuery = _dbSet;
             dbQuery = dbQuery.IncludeProperties(navigationProperties);
             dbQuery = dbQuery.Where(predicate);
-            return await dbQuery.FirstOrDefaultAsync();
+            return await dbQuery.SingleOrDefaultAsync();
         }
 
         /// <summary>

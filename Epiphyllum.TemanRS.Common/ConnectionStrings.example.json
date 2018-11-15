@@ -1,7 +1,0 @@
-{
-  "ConnectionStrings": {
-    "Default": "Example Default Connection Strings",
-    "Master": "Example Master Connection Strings",
-    "Transaction": "Example Transaction Connection Strings"
-  }
-}

@@ -44,19 +44,16 @@ namespace Epiphyllum.TemanRS.Repositories.Data.Mapping
             builder.Property(entity => entity.CreatedTime)
                 .IsRequired()
                 .HasColumnType("datetime")
-                .ValueGeneratedOnAdd()
                 .HasDefaultValueSql("(getdate())");
 
             builder.Property(entity => entity.ModifiedBy)
                 .HasMaxLength(400);
 
             builder.Property(entity => entity.ModifiedTime)
-                .HasColumnType("datetime")
-                .ValueGeneratedOnUpdate();
+                .HasColumnType("datetime");
 
             builder.Property(entity => entity.RowVersion)
                 .IsRequired()
-                .ValueGeneratedOnAddOrUpdate()
                 .IsRowVersion();
 
             PostConfigure(builder);

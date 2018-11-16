@@ -25,32 +25,32 @@ namespace Epiphyllum.TemanRS.Repositories.Domain.Departments
         public string DepartmentDescription { get; set; }
 
         /// <summary>
-        /// Gets or sets the entity deleted is true or false
+        /// Gets or sets the department deleted is true or false
         /// </summary>
         public bool IsDeleted { get; set; }
 
         /// <summary>
-        /// Gets or sets the entity created by
+        /// Gets or sets the department created by
         /// </summary>
         public string CreatedBy { get; set; }
 
         /// <summary>
-        /// Gets or sets the entity created time
+        /// Gets or sets the department created time
         /// </summary>
         public DateTime CreatedTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the entity modified by
+        /// Gets or sets the department modified by
         /// </summary>
         public string ModifiedBy { get; set; }
 
         /// <summary>
-        /// Gets or sets the entity modified time
+        /// Gets or sets the department modified time
         /// </summary>
         public DateTime? ModifiedTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the entity row version
+        /// Gets or sets the department row version
         /// </summary>
         public byte[] RowVersion { get; set; }
     }

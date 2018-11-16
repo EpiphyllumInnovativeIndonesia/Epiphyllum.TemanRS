@@ -13,5 +13,10 @@ namespace Epiphyllum.TemanRS.Repositories.Data.Mapping
         /// Gets a name of the unique index column
         /// </summary>
         public static string UniqueIndex => "UIX_{0}_{1}";
+
+        /// <summary>
+        /// Gets a name of the index column
+        /// </summary>
+        public static string Index => "IX_{0}_{1}";
     }
 }

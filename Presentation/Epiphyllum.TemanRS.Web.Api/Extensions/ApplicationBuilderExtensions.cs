@@ -20,6 +20,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         public static void ConfigureApplicationBuilder(this IApplicationBuilder app)
         {
             app.UseHsts();
+            app.UseAuthentication();
             app.ConfigureAppLocalization();
             app.UseHttpsRedirection();
             app.UseMvc();

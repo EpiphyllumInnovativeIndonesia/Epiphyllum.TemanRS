@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Common;
 using Epiphyllum.TemanRS.Repositories.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data
     /// <summary>
     /// Represents database context
     /// </summary>
-    public partial interface IDbContext
+    public partial interface IDbContext : IRegisterScoped
     {
         /// <summary>
         /// Creates a DbSet that can be used to query and save instances of entity

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace Epiphyllum.TemanRS.Repositories.Security
+namespace Epiphyllum.TemanRS.Common.Security
 {
     /// <summary>
     /// Represents a password hasher
@@ -53,11 +53,11 @@ namespace Epiphyllum.TemanRS.Repositories.Security
         /// <remarks>Implementations of this method should be time consistent</remarks>
         public virtual PasswordVerificationStatus VerifyHashedPassword(string hashedPassword, string providedPassword)
         {
-            if (hashedPassword == null)
+            if (string.IsNullOrEmpty(hashedPassword))
             {
                 throw new ArgumentNullException(nameof(hashedPassword));
             }
-            if (providedPassword == null)
+            if (string.IsNullOrEmpty(providedPassword))
             {
                 throw new ArgumentNullException(nameof(providedPassword));
             }

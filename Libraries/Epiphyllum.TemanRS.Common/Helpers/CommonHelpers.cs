@@ -8,7 +8,7 @@ namespace Epiphyllum.TemanRS.Common.Helpers
     /// <summary>
     /// Represents a common helpers
     /// </summary>
-    public partial class CommonHelpers
+    public partial class CommonHelpers : IRegisterSingleton
     {
         private const string _encodedPattern = @"^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
 

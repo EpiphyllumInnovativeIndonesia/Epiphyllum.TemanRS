@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Common.Helpers;
+using Epiphyllum.TemanRS.Common;
 using Epiphyllum.TemanRS.Repositories;
 using Epiphyllum.TemanRS.Repositories.Data;
-using Epiphyllum.TemanRS.Repositories.Security;
+using Epiphyllum.TemanRS.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -29,6 +32,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         {
             services.ConfigureDbContext(configuration);
             services.ConfigureLocalization();
+            services.ConfigureAuthentication(configuration);
             services.ConfigureDependencyContainer();
             services.ConfigureMvc();
         }
@@ -61,6 +65,31 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         }
 
         /// <summary>
+        /// Configure authentication
+        /// </summary>
+        /// <param name="services">This services</param>
+        internal static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            var key = Encoding.ASCII.GetBytes(configuration["SecretKey"]);
+            services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(jwt =>
+            {
+                jwt.RequireHttpsMetadata = false;
+                jwt.SaveToken = true;
+                jwt.TokenValidationParameters = new TokenValidationParameters {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+        }
+
+        /// <summary>
         /// Configure localization services
         /// </summary>
         /// <param name="services">IServiceCollection</param>
@@ -75,11 +104,21 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <param name="services">IServiceCollection.</param>
         public static void ConfigureDependencyContainer(this IServiceCollection services)
         {
-            services.AddSingleton<IPasswordHasher, PasswordHasher>();
-            services.AddSingleton<CommonHelpers>();
+            services.Scan(scan => scan.FromApplicationDependencies()
+                .AddClasses(classes => classes.AssignableTo<IRegisterSingleton>())
+                    .AsSelfWithInterfaces()
+                    .WithSingletonLifetime()
+                .AddClasses(classes => classes.AssignableTo<IRegisterScoped>())
+                    .AsSelfWithInterfaces()
+                    .WithScopedLifetime()
+                .AddClasses(classes => classes.AssignableTo<IRegisterTransient>())
+                    .AsSelfWithInterfaces()
+                    .WithTransientLifetime());
 
-            services.AddScoped<IDbContext, EpiphyllumDbContext>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.Scan(scan => scan.FromAssembliesOf(typeof(IRepository<>))
+                .AddClasses(classes => classes.AssignableTo(typeof(IRepository<>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
         }
     }
 }

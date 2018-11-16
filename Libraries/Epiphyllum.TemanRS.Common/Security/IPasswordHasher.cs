@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Epiphyllum.TemanRS.Common.Enums;
 
-namespace Epiphyllum.TemanRS.Repositories.Security
+namespace Epiphyllum.TemanRS.Common.Security
 {
     /// <summary>
     /// Represents a password hasher
     /// </summary>
-    public interface IPasswordHasher
+    public interface IPasswordHasher : IRegisterSingleton
     {
         /// <summary>
         /// Returns a hashed representation of the supplied <paramref name="password"/>

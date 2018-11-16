@@ -9,6 +9,19 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Common\Epiphyllum.TemanRS.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.cryptography.keyderivation\2.1.1\lib\netcoreapp2.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Identity.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.identity.core\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Identity.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties connectionstrings_1json__JSONSchema="http://json.schemastore.org/appsettings" /></VisualStudio></ProjectExtensions>
 
 </Project>

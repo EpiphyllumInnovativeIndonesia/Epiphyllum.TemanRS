@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Common.Helpers;
 using Epiphyllum.TemanRS.Repositories;
 using Epiphyllum.TemanRS.Repositories.Data;
+using Epiphyllum.TemanRS.Repositories.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -73,6 +75,9 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <param name="services">IServiceCollection.</param>
         public static void ConfigureDependencyContainer(this IServiceCollection services)
         {
+            services.AddSingleton<IPasswordHasher, PasswordHasher>();
+            services.AddSingleton<CommonHelpers>();
+
             services.AddScoped<IDbContext, EpiphyllumDbContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }

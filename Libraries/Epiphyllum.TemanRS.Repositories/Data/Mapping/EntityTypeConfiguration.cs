@@ -21,6 +21,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data.Mapping
         /// <param name="builder">The builder to be used to configure the entity</param>
         protected virtual void PostConfigure(EntityTypeBuilder<TEntity> builder)
         {
+            builder.HasQueryFilter(entity => !entity.IsDeleted);
         }
 
         /// <summary>

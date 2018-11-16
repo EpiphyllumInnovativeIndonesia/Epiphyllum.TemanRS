@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Repositories;
 using Epiphyllum.TemanRS.Repositories.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -73,6 +74,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         public static void ConfigureDependencyContainer(this IServiceCollection services)
         {
             services.AddScoped<IDbContext, EpiphyllumDbContext>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
     }
 }

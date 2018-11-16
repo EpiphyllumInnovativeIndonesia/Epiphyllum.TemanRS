@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Epiphyllum.TemanRS.Repositories.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +26,12 @@ namespace Epiphyllum.TemanRS.Repositories.Data
         /// </summary>
         /// <returns>The number of state entries written to the database</returns>
         int SaveChanges();
+
+        /// <summary>
+        /// Saves all changes made in this context to the database asynchronously
+        /// </summary>
+        /// <returns>The number of state entries written to the database</returns>
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Generate a script to create all tables for the current model

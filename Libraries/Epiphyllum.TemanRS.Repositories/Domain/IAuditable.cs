@@ -9,7 +9,6 @@ namespace Epiphyllum.TemanRS.Repositories.Domain
     /// </summary>
     public interface IAuditable
     {
-
         /// <summary>
         /// Gets or sets the entity deleted is true or false
         /// </summary>

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Epiphyllum.TemanRS.Repositories.Data.Mapping;
 using Epiphyllum.TemanRS.Repositories.Domain;
+using Epiphyllum.TemanRS.Repositories.Helpers;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
@@ -69,55 +70,12 @@ namespace Epiphyllum.TemanRS.Repositories.Data
         }
 
         /// <summary>
-        /// Audit purpose
-        /// </summary>
-        protected virtual void Audit()
-        {
-            var auditEntries = base.ChangeTracker.Entries()
-                .Where(entry => entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.State == EntityState.Deleted);
-
-            foreach (var auditEntry in auditEntries)
-            {
-                try
-                {
-                    if (auditEntry.State == EntityState.Added)
-                    {
-
-                    }
-                    else if (auditEntry.State == EntityState.Modified)
-                    {
-
-                    }
-                    else if (auditEntry.State == EntityState.Deleted)
-                    {
-                        var uniqueIndexProperties = auditEntry.OriginalValues.Properties.Where(prop => prop.IsIndex());
-                        var primaryKeyProperty = auditEntry.OriginalValues.Properties.Where(prop => prop.IsPrimaryKey()).SingleOrDefault();
-                        var deletedKeyProperty = auditEntry.OriginalValues.Properties.Where(prop => prop.Name.Equals(nameof(IAuditable.IsDeleted))).SingleOrDefault();
-                        var primaryKeyValue = auditEntry.OriginalValues[primaryKeyProperty];
-
-                        foreach (var uniqueIndexProperty in uniqueIndexProperties)
-                        {
-                            var originalUniqueIndexValue = auditEntry.OriginalValues[uniqueIndexProperty];
-                            auditEntry.CurrentValues[uniqueIndexProperty] = $"{originalUniqueIndexValue}-{primaryKeyValue}-{EntityState.Deleted.ToString()}";
-                        }
-
-                        auditEntry.CurrentValues[deletedKeyProperty] = true;
-                        auditEntry.State = EntityState.Modified;
-                    }
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-        }
-
-        /// <summary>
         /// Saves all changes made in this context to the database
         /// </summary>
         /// <returns>The number of state entries written to the database</returns>
         public override int SaveChanges()
         {
+            ContextHelpers.Audit(this);
             return base.SaveChanges();
         }
 
@@ -127,7 +85,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data
         /// <returns>The number of state entries written to the database</returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            Audit();
+            ContextHelpers.Audit(this);
             return await base.SaveChangesAsync(cancellationToken);
         }
 

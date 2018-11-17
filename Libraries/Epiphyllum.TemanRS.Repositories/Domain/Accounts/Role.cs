@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Epiphyllum.TemanRS.Common.Data;
 
 namespace Epiphyllum.TemanRS.Repositories.Domain.Accounts
 {

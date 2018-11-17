@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Epiphyllum.TemanRS.Common.Data;
 using Epiphyllum.TemanRS.Repositories.Domain;
 using Microsoft.EntityFrameworkCore;
 

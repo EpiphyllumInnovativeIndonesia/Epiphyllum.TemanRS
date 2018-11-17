@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Common;
-using Epiphyllum.TemanRS.Repositories;
+using Epiphyllum.TemanRS.Common.Infrastructures;
+using Epiphyllum.TemanRS.Common.Infrastructures.DependencyInjection;
 using Epiphyllum.TemanRS.Repositories.Data;
-using Epiphyllum.TemanRS.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -30,10 +31,16 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <param name="configuration">IConfiguration</param>
         public static void ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHttpContextAccessor();
+            services.AddDependencyContainer();
+
+            var engine = EngineContext.Create();
+            engine.Initialize(services);
+            services = engine.ConfigureServices(services, configuration);
+
             services.ConfigureDbContext(configuration);
             services.ConfigureLocalization();
             services.ConfigureAuthentication(configuration);
-            services.ConfigureDependencyContainer();
             services.ConfigureMvc();
         }
 
@@ -102,23 +109,9 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// Configure inversion of control.
         /// </summary>
         /// <param name="services">IServiceCollection.</param>
-        public static void ConfigureDependencyContainer(this IServiceCollection services)
+        public static void AddDependencyContainer(this IServiceCollection services)
         {
-            services.Scan(scan => scan.FromApplicationDependencies()
-                .AddClasses(classes => classes.AssignableTo<IRegisterSingleton>())
-                    .AsSelfWithInterfaces()
-                    .WithSingletonLifetime()
-                .AddClasses(classes => classes.AssignableTo<IRegisterScoped>())
-                    .AsSelfWithInterfaces()
-                    .WithScopedLifetime()
-                .AddClasses(classes => classes.AssignableTo<IRegisterTransient>())
-                    .AsSelfWithInterfaces()
-                    .WithTransientLifetime());
-
-            services.Scan(scan => scan.FromAssembliesOf(typeof(IRepository<>))
-                .AddClasses(classes => classes.AssignableTo(typeof(IRepository<>)))
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
+            services.AddSingleton<IDependencyManagement, DependencyManagement>();
         }
     }
 }

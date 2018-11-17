@@ -4,9 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Repositories.Domain;
 
-namespace Epiphyllum.TemanRS.Repositories
+namespace Epiphyllum.TemanRS.Common.Data
 {
     /// <summary>
     /// Represents an entity repository

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Epiphyllum.TemanRS.Repositories.Domain
+namespace Epiphyllum.TemanRS.Common.Data
 {
     /// <summary>
     /// Interface for auditable entities

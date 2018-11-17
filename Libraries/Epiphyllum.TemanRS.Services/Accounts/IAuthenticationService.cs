@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Common;
+using Epiphyllum.TemanRS.Common.Infrastructures;
 using Epiphyllum.TemanRS.Repositories.Domain.Accounts;
 
 namespace Epiphyllum.TemanRS.Services.Accounts

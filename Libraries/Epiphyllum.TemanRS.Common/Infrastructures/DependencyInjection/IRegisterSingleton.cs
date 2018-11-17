@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Epiphyllum.TemanRS.Common
+namespace Epiphyllum.TemanRS.Common.Infrastructures
 {
     /// <summary>
     /// Objects which derived from this interface will be registered as singleton service in dependency injection container

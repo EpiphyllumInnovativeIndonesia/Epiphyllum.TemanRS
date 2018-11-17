@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Epiphyllum.TemanRS.Common.Enums;
+using Epiphyllum.TemanRS.Common.Infrastructures;
 
 namespace Epiphyllum.TemanRS.Common.Security
 {

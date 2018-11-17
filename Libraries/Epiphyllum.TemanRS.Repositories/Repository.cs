@@ -4,8 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Repositories.Data;
-using Epiphyllum.TemanRS.Repositories.Domain;
+using Epiphyllum.TemanRS.Common.Data;
 using Epiphyllum.TemanRS.Repositories.Extensions;
 using Microsoft.EntityFrameworkCore;
 

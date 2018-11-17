@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 
-namespace Epiphyllum.TemanRS.Repositories.Data.Mapping
+namespace Epiphyllum.TemanRS.Core.Data
 {
     /// <summary>
     /// Represents database context model mapping configuration

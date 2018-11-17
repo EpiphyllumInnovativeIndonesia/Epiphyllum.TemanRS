@@ -6,12 +6,12 @@ using System.Text;
 using Epiphyllum.TemanRS.Core.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Epiphyllum.TemanRS.Repositories.Extensions
+namespace Epiphyllum.TemanRS.Repositories.Helpers
 {
     /// <summary>
     /// Represents repository extensions
     /// </summary>
-    public static class RepositoryExtensions
+    public static class RepositoryHelpers
     {
         /// <summary>
         /// Includes navigation property related entity framework object

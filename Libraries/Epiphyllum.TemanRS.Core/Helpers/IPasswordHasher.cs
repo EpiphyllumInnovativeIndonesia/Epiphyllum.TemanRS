@@ -4,7 +4,7 @@ using System.Text;
 using Epiphyllum.TemanRS.Core.Enums;
 using Epiphyllum.TemanRS.Core.Infrastructures;
 
-namespace Epiphyllum.TemanRS.Core.Security
+namespace Epiphyllum.TemanRS.Core.Helpers
 {
     /// <summary>
     /// Represents a password hasher

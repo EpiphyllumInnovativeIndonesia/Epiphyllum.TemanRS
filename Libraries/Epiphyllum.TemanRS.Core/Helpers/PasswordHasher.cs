@@ -4,12 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using Epiphyllum.TemanRS.Core.Enums;
-using Epiphyllum.TemanRS.Core.Helpers;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace Epiphyllum.TemanRS.Core.Security
+namespace Epiphyllum.TemanRS.Core.Helpers
 {
     /// <summary>
     /// Represents a password hasher

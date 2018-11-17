@@ -5,10 +5,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Epiphyllum.TemanRS.Core.Data;
-using Epiphyllum.TemanRS.Repositories.Extensions;
+using Epiphyllum.TemanRS.Repositories.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-namespace Epiphyllum.TemanRS.Repositories
+namespace Epiphyllum.TemanRS.Repositories.Data
 {
     /// <summary>
     /// Represents the Entity Framework repository

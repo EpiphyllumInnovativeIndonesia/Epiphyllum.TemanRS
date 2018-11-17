@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Epiphyllum.TemanRS.Common.Data;
+using Epiphyllum.TemanRS.Core.Data;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Epiphyllum.TemanRS.Common.Infrastructures.DependencyInjection
+namespace Epiphyllum.TemanRS.Core.Infrastructures.DependencyInjection
 {
     public class DependencyManagement : IDependencyManagement
     {

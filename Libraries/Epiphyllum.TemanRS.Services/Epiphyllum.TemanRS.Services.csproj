@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Epiphyllum.TemanRS.Common\Epiphyllum.TemanRS.Common.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Core\Epiphyllum.TemanRS.Core.csproj" />
     <ProjectReference Include="..\Epiphyllum.TemanRS.Repositories\Epiphyllum.TemanRS.Repositories.csproj" />
   </ItemGroup>
 

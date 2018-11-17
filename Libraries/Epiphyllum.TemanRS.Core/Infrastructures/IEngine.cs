@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Epiphyllum.TemanRS.Common.Infrastructures
+namespace Epiphyllum.TemanRS.Core.Infrastructures
 {
     /// <summary>
     /// Classes implementing this interface can serve as a portal for the various services composing the Nop engine. 

@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Epiphyllum.TemanRS.Common\Epiphyllum.TemanRS.Common.csproj" />
+    <ProjectReference Include="..\..\Libraries\Epiphyllum.TemanRS.Core\Epiphyllum.TemanRS.Core.csproj" />
     <ProjectReference Include="..\..\Libraries\Epiphyllum.TemanRS.Repositories\Epiphyllum.TemanRS.Repositories.csproj" />
     <ProjectReference Include="..\..\Libraries\Epiphyllum.TemanRS.Services\Epiphyllum.TemanRS.Services.csproj" />
   </ItemGroup>

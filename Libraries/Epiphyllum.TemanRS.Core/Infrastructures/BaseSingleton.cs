@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Epiphyllum.TemanRS.Common.Infrastructures
+namespace Epiphyllum.TemanRS.Core.Infrastructures
 {
     /// <summary>
     /// Provides access to all "singletons" stored by <see cref="Singleton{T}"/>.

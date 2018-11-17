@@ -5,9 +5,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Common.Data;
-using Epiphyllum.TemanRS.Common.Enums;
-using Epiphyllum.TemanRS.Common.Security;
+using Epiphyllum.TemanRS.Core.Data;
+using Epiphyllum.TemanRS.Core.Enums;
+using Epiphyllum.TemanRS.Core.Security;
 using Epiphyllum.TemanRS.Repositories.Domain.Accounts;
 using Microsoft.IdentityModel.Tokens;
 

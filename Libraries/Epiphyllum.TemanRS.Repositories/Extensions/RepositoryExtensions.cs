@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using Epiphyllum.TemanRS.Common.Data;
+using Epiphyllum.TemanRS.Core.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Epiphyllum.TemanRS.Repositories.Extensions

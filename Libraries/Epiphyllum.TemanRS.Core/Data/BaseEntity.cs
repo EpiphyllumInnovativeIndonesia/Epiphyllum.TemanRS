@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Epiphyllum.TemanRS.Common.Data
+namespace Epiphyllum.TemanRS.Core.Data
 {
     /// <summary>
     /// Base class for entities

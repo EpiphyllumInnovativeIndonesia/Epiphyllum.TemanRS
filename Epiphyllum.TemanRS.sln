@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epiphyllum.TemanRS.Reposito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epiphyllum.TemanRS.Services", "Libraries\Epiphyllum.TemanRS.Services\Epiphyllum.TemanRS.Services.csproj", "{21F00F47-595D-4E1D-8C81-702C3017DA27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epiphyllum.TemanRS.Common", "Libraries\Epiphyllum.TemanRS.Common\Epiphyllum.TemanRS.Common.csproj", "{BE6B7345-AF15-4EDE-89B5-B828932094E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epiphyllum.TemanRS.Core", "Libraries\Epiphyllum.TemanRS.Core\Epiphyllum.TemanRS.Core.csproj", "{BE6B7345-AF15-4EDE-89B5-B828932094E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

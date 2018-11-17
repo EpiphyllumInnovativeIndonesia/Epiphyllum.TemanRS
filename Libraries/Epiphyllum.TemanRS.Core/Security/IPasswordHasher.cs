@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Epiphyllum.TemanRS.Common.Enums;
-using Epiphyllum.TemanRS.Common.Infrastructures;
+using Epiphyllum.TemanRS.Core.Enums;
+using Epiphyllum.TemanRS.Core.Infrastructures;
 
-namespace Epiphyllum.TemanRS.Common.Security
+namespace Epiphyllum.TemanRS.Core.Security
 {
     /// <summary>
     /// Represents a password hasher

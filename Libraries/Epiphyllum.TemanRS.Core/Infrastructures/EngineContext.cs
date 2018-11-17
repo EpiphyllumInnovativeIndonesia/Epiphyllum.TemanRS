@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Epiphyllum.TemanRS.Common.Infrastructures
+namespace Epiphyllum.TemanRS.Core.Infrastructures
 {
     /// <summary>
     /// Provides access to the singleton instance of the Nop engine.

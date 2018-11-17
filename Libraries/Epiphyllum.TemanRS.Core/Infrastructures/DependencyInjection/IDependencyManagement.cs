@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Epiphyllum.TemanRS.Common.Infrastructures.DependencyInjection
+namespace Epiphyllum.TemanRS.Core.Infrastructures.DependencyInjection
 {
     public interface IDependencyManagement
     {

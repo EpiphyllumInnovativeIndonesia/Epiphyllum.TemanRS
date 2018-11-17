@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
-using Epiphyllum.TemanRS.Common.Enums;
-using Epiphyllum.TemanRS.Common.Helpers;
+using Epiphyllum.TemanRS.Core.Enums;
+using Epiphyllum.TemanRS.Core.Helpers;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace Epiphyllum.TemanRS.Common.Security
+namespace Epiphyllum.TemanRS.Core.Security
 {
     /// <summary>
     /// Represents a password hasher

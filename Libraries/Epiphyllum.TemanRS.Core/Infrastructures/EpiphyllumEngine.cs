@@ -4,14 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
-using Epiphyllum.TemanRS.Common.Infrastructures.DependencyInjection;
+using Epiphyllum.TemanRS.Core.Infrastructures.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Epiphyllum.TemanRS.Common.Infrastructures
+namespace Epiphyllum.TemanRS.Core.Infrastructures
 {
     /// <summary>
     /// Represents Epiphyllum engine

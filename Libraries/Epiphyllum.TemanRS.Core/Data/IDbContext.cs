@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Common.Infrastructures;
+using Epiphyllum.TemanRS.Core.Infrastructures;
 using Microsoft.EntityFrameworkCore;
 
-namespace Epiphyllum.TemanRS.Common.Data
+namespace Epiphyllum.TemanRS.Core.Data
 {
     /// <summary>
     /// Represents database context

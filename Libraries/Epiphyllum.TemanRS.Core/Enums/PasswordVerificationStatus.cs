@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Epiphyllum.TemanRS.Common.Enums
+namespace Epiphyllum.TemanRS.Core.Enums
 {
     /// <summary>
     /// Represents a password verification status enum

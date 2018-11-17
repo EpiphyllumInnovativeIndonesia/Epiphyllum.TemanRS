@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Common.Data;
+using Epiphyllum.TemanRS.Core.Data;
 using Epiphyllum.TemanRS.Repositories.Data.Mapping;
 using Epiphyllum.TemanRS.Repositories.Helpers;
 using JetBrains.Annotations;

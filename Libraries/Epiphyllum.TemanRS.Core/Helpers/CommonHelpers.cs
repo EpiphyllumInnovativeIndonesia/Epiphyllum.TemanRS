@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Epiphyllum.TemanRS.Common.Infrastructures;
+using Epiphyllum.TemanRS.Core.Infrastructures;
 
-namespace Epiphyllum.TemanRS.Common.Helpers
+namespace Epiphyllum.TemanRS.Core.Helpers
 {
     /// <summary>
     /// Represents a common helpers

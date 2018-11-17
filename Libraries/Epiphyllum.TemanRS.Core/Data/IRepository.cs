@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epiphyllum.TemanRS.Common.Data
+namespace Epiphyllum.TemanRS.Core.Data
 {
     /// <summary>
     /// Represents an entity repository

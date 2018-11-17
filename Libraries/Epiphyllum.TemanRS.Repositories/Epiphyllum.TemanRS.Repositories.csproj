@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Epiphyllum.TemanRS.Common\Epiphyllum.TemanRS.Common.csproj" />
+    <ProjectReference Include="..\Epiphyllum.TemanRS.Core\Epiphyllum.TemanRS.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

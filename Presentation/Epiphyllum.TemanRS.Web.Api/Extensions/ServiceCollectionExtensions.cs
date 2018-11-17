@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Epiphyllum.TemanRS.Core.Infrastructures;
 using Epiphyllum.TemanRS.Core.Infrastructures.DependencyInjection;
 using Epiphyllum.TemanRS.Repositories.Data;
+using Epiphyllum.TemanRS.Services.Accounts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,16 +31,15 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         public static void ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHttpContextAccessor();
-            services.AddDependencyContainer();
+            services.AddLocalization();
+
+            services.ConfigureDbContext(configuration);
+            services.ConfigureAuthentication(configuration);
+            services.ConfigureMvc();
 
             var engine = EngineContext.Create();
             engine.Initialize(services);
             services = engine.ConfigureServices(services, configuration);
-
-            services.ConfigureDbContext(configuration);
-            services.ConfigureLocalization();
-            services.ConfigureAuthentication(configuration);
-            services.ConfigureMvc();
         }
 
         /// <summary>
@@ -92,24 +92,6 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
                     ValidateAudience = false
                 };
             });
-        }
-
-        /// <summary>
-        /// Configure localization services
-        /// </summary>
-        /// <param name="services">IServiceCollection</param>
-        public static void ConfigureLocalization(this IServiceCollection services)
-        {
-            services.AddLocalization();
-        }
-
-        /// <summary>
-        /// Configure inversion of control.
-        /// </summary>
-        /// <param name="services">IServiceCollection.</param>
-        public static void AddDependencyContainer(this IServiceCollection services)
-        {
-            services.AddSingleton<IDependencyManagement, DependencyManagement>();
         }
     }
 }

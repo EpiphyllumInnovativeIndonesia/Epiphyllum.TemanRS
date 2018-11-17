@@ -40,22 +40,12 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
         }
 
         /// <summary>
-        /// Register dependencies
-        /// </summary>
-        /// <param name="services">Collection of service descriptors</param>
-        protected virtual IServiceCollection RegisterDependencies(IServiceCollection services)
-        {
-            IDependencyManagement dependencyManagement = Resolve<IDependencyManagement>();
-            services = dependencyManagement.ConfigureDependency(services);
-            return services;
-        }
-
-        /// <summary>
         /// Initialize engine
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
         public void Initialize(IServiceCollection services)
         {
+            services.AddSingleton<IDependencyManagement, DependencyManagement>();
             _serviceProvider = services.BuildServiceProvider();
         }
 
@@ -76,7 +66,10 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
         /// <returns>Service provider</returns>
         public IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            services = RegisterDependencies(services);
+            IDependencyManagement dependencyManagement = Resolve<IDependencyManagement>();
+            services = dependencyManagement.ConfigureDependency(services);
+
+            _serviceProvider = services.BuildServiceProvider();
             return services;
         }
 

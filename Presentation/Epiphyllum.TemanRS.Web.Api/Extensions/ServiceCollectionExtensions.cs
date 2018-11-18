@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -102,8 +103,9 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <typeparam name="TConfig">Configuration parameters</typeparam>
         /// <param name="services">Collection of service descriptors</param>
         /// <param name="configuration">Set of key/value application configuration properties</param>
+        /// <param name="reloadOnChange">Whether the configuration should be reloaded if file changes (default is false)</param>
         /// <returns>Instance of configuration parameters</returns>
-        public static TConfig AddStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration) where TConfig : class, new()
+        public static TConfig AddStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration, bool reloadOnChange = false) where TConfig : class, new()
         {
             if (services == null)
                 throw new ArgumentNullException(nameof(services));
@@ -114,11 +116,22 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             //create instance of config
             var config = new TConfig();
 
-            //bind it to the appropriate section of configuration
-            configuration.Bind(config);
+            if (reloadOnChange)
+            {
+                //configure it to the appropriate section of configuration
+                services.Configure<TConfig>(configuration);
 
-            //and register it as a service
-            services.AddSingleton(config);
+                //and register it as a scoped options snapshot service
+                services.AddScoped(option => option.GetService<IOptionsSnapshot<TConfig>>().Value);
+            }
+            else
+            {
+                //bind it to the appropriate section of configuration
+                configuration.Bind(config);
+
+                //and register it as a singleton service
+                services.AddSingleton(config);
+            }
 
             return config;
         }

@@ -45,6 +45,8 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
         /// <param name="services">Collection of service descriptors</param>
         public void Initialize(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddLocalization();
             services.AddSingleton<IDependencyManagement, DependencyManagement>();
             _serviceProvider = services.BuildServiceProvider();
         }

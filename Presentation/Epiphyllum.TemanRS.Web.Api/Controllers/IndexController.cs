@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Core.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,17 @@ namespace Epiphyllum.TemanRS.Web.Api.Controllers
     [AllowAnonymous]
     public class IndexController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        private readonly EpiphyllumConfig _configuration;
 
-        public IndexController(IConfiguration configuration)
+        public IndexController(EpiphyllumConfig configuration)
         {
             _configuration = configuration;
         }
 
         [HttpGet]
-        public ActionResult<string> Get()
+        public ActionResult<object> Get()
         {
-            var x = _configuration;
-            return _configuration.GetConnectionString("Default");
+            return _configuration;
         }
     }
 }

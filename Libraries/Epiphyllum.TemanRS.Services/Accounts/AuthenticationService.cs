@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Core.Configuration;
 using Epiphyllum.TemanRS.Core.Data;
 using Epiphyllum.TemanRS.Core.Enums;
 using Epiphyllum.TemanRS.Core.Helpers;
@@ -20,11 +21,13 @@ namespace Epiphyllum.TemanRS.Services.Accounts
     {
         private readonly IRepository<User> _userRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly EpiphyllumConfig _epiphyllumConfig;
 
-        public AuthenticationService(IRepository<User> userRepository, IPasswordHasher passwordHasher)
+        public AuthenticationService(IRepository<User> userRepository, IPasswordHasher passwordHasher, EpiphyllumConfig epiphyllumConfig)
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
+            _epiphyllumConfig = epiphyllumConfig;
         }
 
         /// <summary>
@@ -73,13 +76,13 @@ namespace Epiphyllum.TemanRS.Services.Accounts
         private string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("Th1s !s 5ecR3t k3Y !!!");
+            var key = Encoding.ASCII.GetBytes(_epiphyllumConfig.AuthenticationKey);
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Username.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddMinutes(_epiphyllumConfig.AuthenticationExpires),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);

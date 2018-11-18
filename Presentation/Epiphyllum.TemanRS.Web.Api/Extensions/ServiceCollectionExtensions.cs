@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Core.Configuration;
 using Epiphyllum.TemanRS.Core.Infrastructures;
 using Epiphyllum.TemanRS.Core.Infrastructures.DependencyInjection;
 using Epiphyllum.TemanRS.Repositories.Data;
@@ -30,16 +31,15 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <param name="configuration">IConfiguration</param>
         public static void ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddHttpContextAccessor();
-            services.AddLocalization();
-
-            services.ConfigureDbContext(configuration);
-            services.ConfigureAuthentication(configuration);
-            services.ConfigureMvc();
+            services.AddStartupConfig<EpiphyllumConfig>(configuration.GetSection(nameof(EpiphyllumConfig)));
 
             var engine = EngineContext.Create();
             engine.Initialize(services);
             services = engine.ConfigureServices(services, configuration);
+
+            services.ConfigureDbContext();
+            services.ConfigureAuthentication();
+            services.ConfigureMvc();
         }
 
         /// <summary>
@@ -61,11 +61,12 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// Configure database context services
         /// </summary>
         /// <param name="services">IServiceCollection</param>
-        public static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureDbContext(this IServiceCollection services)
         {
+            var config = EngineContext.Current.Resolve<EpiphyllumConfig>();
             services.AddDbContext<EpiphyllumDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("Default"));
+                options.UseSqlServer(config.ConnectionStrings.Default);
             });
         }
 
@@ -73,9 +74,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// Configure authentication
         /// </summary>
         /// <param name="services">This services</param>
-        internal static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureAuthentication(this IServiceCollection services)
         {
-            var key = Encoding.ASCII.GetBytes(configuration["SecretKey"]);
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -83,6 +83,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             })
             .AddJwtBearer(jwt =>
             {
+                var config = EngineContext.Current.Resolve<EpiphyllumConfig>();
+                var key = Encoding.ASCII.GetBytes(config.AuthenticationKey);
                 jwt.RequireHttpsMetadata = false;
                 jwt.SaveToken = true;
                 jwt.TokenValidationParameters = new TokenValidationParameters {
@@ -92,6 +94,33 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
                     ValidateAudience = false
                 };
             });
+        }
+
+        /// <summary>
+        /// Create, bind and register as service the specified configuration parameters 
+        /// </summary>
+        /// <typeparam name="TConfig">Configuration parameters</typeparam>
+        /// <param name="services">Collection of service descriptors</param>
+        /// <param name="configuration">Set of key/value application configuration properties</param>
+        /// <returns>Instance of configuration parameters</returns>
+        public static TConfig AddStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration) where TConfig : class, new()
+        {
+            if (services == null)
+                throw new ArgumentNullException(nameof(services));
+
+            if (configuration == null)
+                throw new ArgumentNullException(nameof(configuration));
+
+            //create instance of config
+            var config = new TConfig();
+
+            //bind it to the appropriate section of configuration
+            configuration.Bind(config);
+
+            //and register it as a service
+            services.AddSingleton(config);
+
+            return config;
         }
     }
 }

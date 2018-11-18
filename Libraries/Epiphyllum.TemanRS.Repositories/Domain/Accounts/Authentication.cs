@@ -20,6 +20,11 @@ namespace Epiphyllum.TemanRS.Repositories.Domain.Accounts
         public string Token { get; set; }
 
         /// <summary>
+        /// Gets or sets the authentication token expires
+        /// </summary>
+        public int TokenExpires { get; set; }
+
+        /// <summary>
         /// Gets or sets the authentication roles
         /// </summary>
         public IEnumerable<Role> Roles { get; set; }

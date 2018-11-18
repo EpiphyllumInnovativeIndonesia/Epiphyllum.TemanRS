@@ -15,13 +15,8 @@ namespace Epiphyllum.TemanRS.Core.Configuration
         public ConnectionStrings ConnectionStrings { get; set; }
 
         /// <summary>
-        /// Gets or sets the epipihlum config authentication key
+        /// Gets or sets the epiphyllum jwt authentication
         /// </summary>
-        public string AuthenticationKey { get; set; }
-
-        /// <summary>
-        /// Gets or sets the epipihlum config authentication expires
-        /// </summary>
-        public int AuthenticationExpires { get; set; }
+        public JwtAuthentication JwtAuthentication { get; set; }
     }
 }

@@ -84,7 +84,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             .AddJwtBearer(jwt =>
             {
                 var config = EngineContext.Current.Resolve<EpiphyllumConfig>();
-                var key = Encoding.ASCII.GetBytes(config.AuthenticationKey);
+                var key = Encoding.ASCII.GetBytes(config.JwtAuthentication.Key);
                 jwt.RequireHttpsMetadata = false;
                 jwt.SaveToken = true;
                 jwt.TokenValidationParameters = new TokenValidationParameters {

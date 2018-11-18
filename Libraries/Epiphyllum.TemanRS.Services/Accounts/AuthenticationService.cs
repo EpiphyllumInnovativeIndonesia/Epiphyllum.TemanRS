@@ -69,20 +69,26 @@ namespace Epiphyllum.TemanRS.Services.Accounts
             authentication.Username = user.Username;
             authentication.Token = GenerateToken(user);
             authentication.Roles = user.UserRoles.Select(prop => prop.Role);
+            authentication.TokenExpires = _epiphyllumConfig.JwtAuthentication.Expires;
 
             return authentication;
         }
 
+        /// <summary>
+        /// Generates token for user specified
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         private string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_epiphyllumConfig.AuthenticationKey);
+            var key = Encoding.ASCII.GetBytes(_epiphyllumConfig.JwtAuthentication.Key);
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Username.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(_epiphyllumConfig.AuthenticationExpires),
+                Expires = DateTime.UtcNow.AddMinutes(_epiphyllumConfig.JwtAuthentication.Expires),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);

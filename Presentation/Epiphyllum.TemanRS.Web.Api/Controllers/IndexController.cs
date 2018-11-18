@@ -24,7 +24,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Controllers
         [HttpGet]
         public ActionResult<object> Get()
         {
-            return _configuration;
+            EpiphyllumConfig config = null;
+            return config;
         }
     }
 }

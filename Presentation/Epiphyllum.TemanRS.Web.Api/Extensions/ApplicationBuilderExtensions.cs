@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Core.Infrastructures.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 
@@ -19,10 +20,11 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <param name="app">IApplicationBuilder</param>
         public static void ConfigureApplicationBuilder(this IApplicationBuilder app)
         {
+            app.ConfigureAppLocalization();
             app.UseHsts();
             app.UseAuthentication();
-            app.ConfigureAppLocalization();
             app.UseHttpsRedirection();
+            app.UseMiddleware<ApiResponseMiddleware>();
             app.UseMvc();
         }
 

@@ -63,6 +63,8 @@ namespace Epiphyllum.TemanRS.Services.Accounts
             {
                 string hashedPassword = _passwordHasher.HashPassword(user.Password);
                 user.Password = hashedPassword;
+                user.ModifiedBy = user.Username;
+                user.ModifiedTime = DateTime.Now;
                 await _userRepository.Update(user);
             }
 
@@ -86,6 +88,7 @@ namespace Epiphyllum.TemanRS.Services.Accounts
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Username.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_epiphyllumConfig.JwtAuthentication.Expires),

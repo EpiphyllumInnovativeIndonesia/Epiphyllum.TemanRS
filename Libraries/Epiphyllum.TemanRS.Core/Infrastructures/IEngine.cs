@@ -14,6 +14,11 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
     public interface IEngine
     {
         /// <summary>
+        /// Return current user
+        /// </summary>
+        IUserManager UserManager { get; }
+
+        /// <summary>
         /// Initialize engine
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>

@@ -29,6 +29,11 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
         public virtual IServiceProvider ServiceProvider => _serviceProvider;
 
         /// <summary>
+        /// Return current user
+        /// </summary>
+        public virtual IUserManager UserManager { get { return Resolve<IUserManager>(); } }
+
+        /// <summary>
         /// Get IServiceProvider
         /// </summary>
         /// <returns>IServiceProvider</returns>

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Epiphyllum.TemanRS.Core.Infrastructures.Middleware;
+using Epiphyllum.TemanRS.Core.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 
@@ -46,7 +47,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
                 SupportedUICultures = supportedCultures
             };
 
-            //localizationOptions.RequestCultureProviders.Insert(0, new DefaultLocalizationProvider());
+            localizationOptions.RequestCultureProviders.Insert(0, new DefaultLocalizationProvider());
             //localizationOptions.RequestCultureProviders.Insert(0, new UserLocalizationProvider());
             app.UseRequestLocalization(localizationOptions);
         }

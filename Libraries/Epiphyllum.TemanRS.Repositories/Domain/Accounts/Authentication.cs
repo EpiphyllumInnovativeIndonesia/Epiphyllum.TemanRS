@@ -27,6 +27,6 @@ namespace Epiphyllum.TemanRS.Repositories.Domain.Accounts
         /// <summary>
         /// Gets or sets the authentication roles
         /// </summary>
-        public IEnumerable<Role> Roles { get; set; }
+        public IEnumerable<string> Roles { get; set; }
     }
 }

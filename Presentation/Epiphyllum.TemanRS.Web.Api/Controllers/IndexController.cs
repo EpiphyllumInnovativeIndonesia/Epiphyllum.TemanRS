@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Core.Configuration;
+using Epiphyllum.TemanRS.Core.Localization.Resources;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Epiphyllum.TemanRS.Web.Api.Controllers
 {
@@ -14,17 +13,17 @@ namespace Epiphyllum.TemanRS.Web.Api.Controllers
     [AllowAnonymous]
     public class IndexController : ControllerBase
     {
-        private readonly EpiphyllumConfig _configuration;
+        private readonly IStringLocalizer<Message> _stringLocalizer;
 
-        public IndexController(EpiphyllumConfig configuration)
+        public IndexController(IStringLocalizer<Message> stringLocalizer)
         {
-            _configuration = configuration;
+            _stringLocalizer = stringLocalizer;
         }
 
         [HttpGet]
-        public ActionResult<object> Get()
+        public string Get()
         {
-            return _configuration;
+            return _stringLocalizer[Message.Hello];
         }
     }
 }

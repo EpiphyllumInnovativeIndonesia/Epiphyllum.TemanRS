@@ -13,10 +13,5 @@ namespace Epiphyllum.TemanRS.Core.Configuration
         /// Gets or sets the epiphyllum connection strings
         /// </summary>
         public ConnectionStrings ConnectionStrings { get; set; }
-
-        /// <summary>
-        /// Gets or sets the epiphyllum jwt authentication
-        /// </summary>
-        public JwtAuthentication JwtAuthentication { get; set; }
     }
 }

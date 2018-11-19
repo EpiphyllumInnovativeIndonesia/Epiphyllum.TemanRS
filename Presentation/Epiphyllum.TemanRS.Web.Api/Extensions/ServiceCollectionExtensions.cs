@@ -33,6 +33,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         public static void ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddStartupConfig<EpiphyllumConfig>(configuration.GetSection(nameof(EpiphyllumConfig)));
+            services.AddStartupConfig<JwtAuthentication>(configuration.GetSection(nameof(EpiphyllumConfig)).GetSection(nameof(JwtAuthentication)), reloadOnChange: true);
+            services.AddStartupConfig<CultureInfo>(configuration.GetSection(nameof(EpiphyllumConfig)).GetSection(nameof(CultureInfo)), reloadOnChange: true);
 
             var engine = EngineContext.Create();
             engine.Initialize(services);
@@ -84,8 +86,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             })
             .AddJwtBearer(jwt =>
             {
-                var config = EngineContext.Current.Resolve<EpiphyllumConfig>();
-                var key = Encoding.ASCII.GetBytes(config.JwtAuthentication.Key);
+                var config = EngineContext.Current.Resolve<JwtAuthentication>();
+                var key = Encoding.ASCII.GetBytes(config.Key);
                 jwt.RequireHttpsMetadata = false;
                 jwt.SaveToken = true;
                 jwt.TokenValidationParameters = new TokenValidationParameters {

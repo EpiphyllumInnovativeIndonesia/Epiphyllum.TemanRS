@@ -21,13 +21,13 @@ namespace Epiphyllum.TemanRS.Services.Accounts
     {
         private readonly IRepository<User> _userRepository;
         private readonly IPasswordHasher _passwordHasher;
-        private readonly EpiphyllumConfig _epiphyllumConfig;
+        private readonly JwtAuthentication _jwtAuthentication;
 
-        public AuthenticationService(IRepository<User> userRepository, IPasswordHasher passwordHasher, EpiphyllumConfig epiphyllumConfig)
+        public AuthenticationService(IRepository<User> userRepository, IPasswordHasher passwordHasher, JwtAuthentication jwtAuthentication)
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
-            _epiphyllumConfig = epiphyllumConfig;
+            _jwtAuthentication = jwtAuthentication;
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace Epiphyllum.TemanRS.Services.Accounts
 
             authentication.Username = user.Username;
             authentication.Token = GenerateToken(user);
-            authentication.Roles = user.UserRoles.Select(prop => prop.Role);
-            authentication.TokenExpires = _epiphyllumConfig.JwtAuthentication.Expires;
+            authentication.Roles = user.UserRoles.Select(prop => prop.Role.RoleName).ToArray();
+            authentication.TokenExpires = _jwtAuthentication.Expires;
 
             return authentication;
         }
@@ -84,14 +84,14 @@ namespace Epiphyllum.TemanRS.Services.Accounts
         private string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_epiphyllumConfig.JwtAuthentication.Key);
+            var key = Encoding.ASCII.GetBytes(_jwtAuthentication.Key);
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Username.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(_epiphyllumConfig.JwtAuthentication.Expires),
+                Expires = DateTime.UtcNow.AddMinutes(_jwtAuthentication.Expires),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);

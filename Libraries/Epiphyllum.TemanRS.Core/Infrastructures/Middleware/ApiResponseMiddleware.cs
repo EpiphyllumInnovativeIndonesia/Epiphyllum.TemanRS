@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using Epiphyllum.TemanRS.Core.Enums;
 using Epiphyllum.TemanRS.Core.Helpers;
 using Epiphyllum.TemanRS.Core.Infrastructures.Exceptions;
+using Epiphyllum.TemanRS.Core.Localization.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 
 namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
@@ -19,10 +21,12 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
     public class ApiResponseMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly IStringLocalizer<ApiResponseMessage> _stringLocalizer;
 
-        public ApiResponseMiddleware(RequestDelegate next)
+        public ApiResponseMiddleware(RequestDelegate next, IStringLocalizer<ApiResponseMessage> stringLocalizer)
         {
             _next = next;
+            _stringLocalizer = stringLocalizer;
         }
 
         /// <summary>
@@ -89,12 +93,13 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
         /// <param name="context"></param>
         /// <param name="exception"></param>
         /// <returns></returns>
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             ApiError apiError;
             ApiResponse apiResponse;
             List<string> apiMessage = new List<string>();
             int code = 0;
+            string responseMessage = string.Empty;
 
             if (exception is ApiException)
             {
@@ -110,7 +115,8 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
             }
             else if (exception is UnauthorizedAccessException)
             {
-                apiError = new ApiError("Unauthorized Access");
+                responseMessage = _stringLocalizer[ApiResponseMessage.Unauthorized];
+                apiError = new ApiError(responseMessage);
                 code = (int)HttpStatusCode.Unauthorized;
                 context.Response.StatusCode = code;
             }
@@ -132,7 +138,8 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
             }
 
             context.Response.ContentType = "application/json";
-            apiMessage.Add(ApiResponseStatus.Exception.GetDescription());
+            responseMessage = _stringLocalizer[ApiResponseMessage.Failure];
+            apiMessage.Add(responseMessage);
             apiResponse = new ApiResponse(code, apiMessage, null, apiError);
 
             var json = JsonConvert.SerializeObject(apiResponse);
@@ -146,7 +153,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
         /// <param name="context"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        private static Task HandleNotSuccessRequestAsync(HttpContext context, object body, int code)
+        private Task HandleNotSuccessRequestAsync(HttpContext context, object body, int code)
         {
             context.Response.ContentType = "application/json";
 
@@ -154,6 +161,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
             ApiResponse apiResponse = null;
             List<string> apiMessage = new List<string>();
             string bodyText = string.Empty;
+            string responseMessage = string.Empty;
 
             if (!body.ToString().IsValidJson())
                 bodyText = JsonConvert.SerializeObject(body);
@@ -163,12 +171,14 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
 
             if (code == (int)HttpStatusCode.NotFound)
             {
-                apiError = new ApiError("The specified URI does not exist. Please verify and try again.");
+                responseMessage = _stringLocalizer[ApiResponseMessage.NotFound];
+                apiError = new ApiError(responseMessage);
             }
             else if (code == (int)HttpStatusCode.Unauthorized || code == (int)HttpStatusCode.Forbidden)
             {
-                apiMessage.Add(ApiResponseStatus.UnAuthorized.GetDescription());
-                apiError = new ApiError("Please contact a support.");
+                responseMessage = _stringLocalizer[ApiResponseMessage.Unauthorized];
+                apiMessage.Add(responseMessage);
+                apiError = new ApiError(_stringLocalizer[ApiResponseMessage.ContactSupport]);
             }
             else if (code == (int)HttpStatusCode.BadRequest)
             {
@@ -178,15 +188,19 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
                 {
                     modelState.AddModelError(item.Key, string.Join(", ", item.Value.ToArray()));
                 }
-                apiMessage.Add(ApiResponseStatus.ValidationError.GetDescription());
+
+                responseMessage = _stringLocalizer[ApiResponseMessage.ValidationError];
+                apiMessage.Add(responseMessage);
                 apiError = new ApiError(modelState);
             }
             else
             {
-                apiError = new ApiError("Your request cannot be processed. Please contact a support.");
+                responseMessage = _stringLocalizer[ApiResponseMessage.ContactSupport];
+                apiError = new ApiError(responseMessage);
             }
 
-            apiMessage.Add(ApiResponseStatus.Failure.GetDescription());
+            responseMessage = _stringLocalizer[ApiResponseMessage.Failure];
+            apiMessage.Add(responseMessage);
             apiResponse = new ApiResponse(code, apiMessage, null, apiError);
             context.Response.StatusCode = code;
 
@@ -201,12 +215,14 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
         /// <param name="body"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        private static Task HandleSuccessRequestAsync(HttpContext context, object body, int code)
+        private Task HandleSuccessRequestAsync(HttpContext context, object body, int code)
         {
             context.Response.ContentType = "application/json";
-            string jsonString, bodyText = string.Empty;
             ApiResponse apiResponse = null;
             List<string> apiMessage = new List<string>();
+            string jsonString = string.Empty;
+            string bodyText = string.Empty;
+            string responseMessage = string.Empty;
 
 
             if (!body.ToString().IsValidJson())
@@ -227,14 +243,16 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
                     jsonString = JsonConvert.SerializeObject(apiResponse);
                 else
                 {
-                    apiMessage.Add(ApiResponseStatus.Success.GetDescription());
+                    responseMessage = _stringLocalizer[ApiResponseMessage.Success];
+                    apiMessage.Add(responseMessage);
                     apiResponse = new ApiResponse(code, apiMessage, bodyContent, null);
                     jsonString = JsonConvert.SerializeObject(apiResponse);
                 }
             }
             else
             {
-                apiMessage.Add(ApiResponseStatus.Success.GetDescription());
+                responseMessage = _stringLocalizer[ApiResponseMessage.Success];
+                apiMessage.Add(responseMessage);
                 apiResponse = new ApiResponse(code, apiMessage, bodyContent, null);
                 jsonString = JsonConvert.SerializeObject(apiResponse);
             }

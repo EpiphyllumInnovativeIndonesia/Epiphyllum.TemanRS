@@ -8,6 +8,7 @@ using Epiphyllum.TemanRS.Core.Enums;
 using Epiphyllum.TemanRS.Core.Helpers;
 using Epiphyllum.TemanRS.Core.Infrastructures.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
 namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
@@ -59,7 +60,8 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
                                 }
                                 else
                                 {
-                                    await HandleNotSuccessRequestAsync(context, context.Response.StatusCode);
+                                    var body = await FormatResponse(context.Response);
+                                    await HandleNotSuccessRequestAsync(context, body, context.Response.StatusCode);
                                 }
                             }
                         }
@@ -144,22 +146,45 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Middleware
         /// <param name="context"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        private static Task HandleNotSuccessRequestAsync(HttpContext context, int code)
+        private static Task HandleNotSuccessRequestAsync(HttpContext context, object body, int code)
         {
             context.Response.ContentType = "application/json";
 
             ApiError apiError = null;
             ApiResponse apiResponse = null;
             List<string> apiMessage = new List<string>();
+            string bodyText = string.Empty;
+
+            if (!body.ToString().IsValidJson())
+                bodyText = JsonConvert.SerializeObject(body);
+            else
+                bodyText = body.ToString();
+
 
             if (code == (int)HttpStatusCode.NotFound)
+            {
                 apiError = new ApiError("The specified URI does not exist. Please verify and try again.");
-            else if (code == (int)HttpStatusCode.NoContent)
-                apiError = new ApiError("The specified URI does not contain any content.");
+            }
             else if (code == (int)HttpStatusCode.Unauthorized || code == (int)HttpStatusCode.Forbidden)
-                apiError = new ApiError("Unauthorized");
+            {
+                apiMessage.Add(ApiResponseStatus.UnAuthorized.GetDescription());
+                apiError = new ApiError("Please contact a support.");
+            }
+            else if (code == (int)HttpStatusCode.BadRequest)
+            {
+                Dictionary<string, List<string>> bodyContent = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(bodyText);
+                ModelStateDictionary modelState = new ModelStateDictionary();
+                foreach (var item in bodyContent)
+                {
+                    modelState.AddModelError(item.Key, string.Join(", ", item.Value.ToArray()));
+                }
+                apiMessage.Add(ApiResponseStatus.ValidationError.GetDescription());
+                apiError = new ApiError(modelState);
+            }
             else
+            {
                 apiError = new ApiError("Your request cannot be processed. Please contact a support.");
+            }
 
             apiMessage.Add(ApiResponseStatus.Failure.GetDescription());
             apiResponse = new ApiResponse(code, apiMessage, null, apiError);

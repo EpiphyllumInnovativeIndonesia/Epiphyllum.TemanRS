@@ -13,10 +13,17 @@ namespace Epiphyllum.TemanRS.Core.Filters
     /// </summary>
     public class RequiredAttribute : ValidationAttribute
     {
+        private readonly IStringLocalizer _stringLocalizer;
+
         /// <summary>
         /// Gets or sets the required attribute error message
         /// </summary>
         public new string ErrorMessage { get; set; }
+
+        public RequiredAttribute()
+        {
+            _stringLocalizer = EngineContext.Current.Resolve<IStringLocalizer<AttributeMessage>>();
+        }
 
         /// <summary>
         /// Overrides is valid method from <see cref="ValidationAttribute"/>
@@ -42,13 +49,15 @@ namespace Epiphyllum.TemanRS.Core.Filters
         /// <returns></returns>
         public override string FormatErrorMessage(string name)
         {
-            if (ErrorMessage == null)
+            string errorMessage = ErrorMessage;
+            ErrorMessage = null;
+
+            if (errorMessage == null)
             {
-                var stringLocalizer = EngineContext.Current.Resolve<IStringLocalizer<AttributeMessage>>();
-                ErrorMessage = stringLocalizer[AttributeMessage.Required];
+                errorMessage = _stringLocalizer.GetString(AttributeMessage.Required);
             }
 
-            return string.Format(ErrorMessage, name);
+            return string.Format(errorMessage, name);
         }
     }
 }

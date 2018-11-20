@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Core.Filters;
 
 namespace Epiphyllum.TemanRS.Web.Api.Models.Accounts
 {
@@ -10,6 +10,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Models.Accounts
     {
         [Required]
         public string Username { get; set; }
+
         [Required]
         public string Password { get; set; }
     }

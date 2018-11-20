@@ -138,4 +138,7 @@
   <data name="ValidationError" xml:space="preserve">
     <value>Request responded with validation error(s).</value>
   </data>
+  <data name="ValidationException" xml:space="preserve">
+    <value>Please correct the specified validation errors and try again.</value>
+  </data>
 </root>

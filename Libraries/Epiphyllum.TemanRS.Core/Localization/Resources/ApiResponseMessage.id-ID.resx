@@ -130,7 +130,7 @@
     <comment>Unable to process the request.</comment>
   </data>
   <data name="NotFound" xml:space="preserve">
-    <value>URI yang diminta tidak ditemukan. Silahkan periksa kembali.</value>
+    <value>URI yang diminta tidak ditemukan. Silahkan periksa dan coba kembali.</value>
     <comment>The specified URI does not exist. Please verify and try again.</comment>
   </data>
   <data name="Success" xml:space="preserve">
@@ -144,5 +144,9 @@
   <data name="ValidationError" xml:space="preserve">
     <value>Terdapat kesalahan validasi dalam merespon permintaan.</value>
     <comment>Request responded with validation error(s).</comment>
+  </data>
+  <data name="ValidationException" xml:space="preserve">
+    <value>Silahkan perbaiki kesalahan validasi berikut dan coba kembali.</value>
+    <comment>Please correct the specified validation errors and try again.</comment>
   </data>
 </root>

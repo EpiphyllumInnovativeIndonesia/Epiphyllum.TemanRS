@@ -17,5 +17,6 @@ namespace Epiphyllum.TemanRS.Core.Localization.Resources
         public const string Failure = "Failure";
         public const string NotFound = "NotFound";
         public const string ContactSupport = "ContactSupport";
+        public const string ValidationException = "ValidationException";
     }
 }

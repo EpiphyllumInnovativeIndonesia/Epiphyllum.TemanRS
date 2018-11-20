@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Epiphyllum.TemanRS.Core.Infrastructures;
+using Epiphyllum.TemanRS.Core.Localization.Resources;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 
 namespace Epiphyllum.TemanRS.Core.Helpers
@@ -61,7 +64,8 @@ namespace Epiphyllum.TemanRS.Core.Helpers
             IsError = true;
             if (modelState != null && modelState.Any(m => m.Value.Errors.Count > 0))
             {
-                ExceptionMessage = "Please correct the specified validation errors and try again.";
+                var stringLocalizer = EngineContext.Current.Resolve<IStringLocalizer<ApiResponseMessage>>();
+                ExceptionMessage = stringLocalizer[ApiResponseMessage.ValidationException];
                 ValidationErrors = modelState.Keys
                     .SelectMany(key => modelState[key].Errors.Select(x => new ValidationError(key, x.ErrorMessage)))
                     .ToList();

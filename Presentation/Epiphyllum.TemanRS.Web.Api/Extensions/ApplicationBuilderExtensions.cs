@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Core.Infrastructures.Middleware;
 using Epiphyllum.TemanRS.Core.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;

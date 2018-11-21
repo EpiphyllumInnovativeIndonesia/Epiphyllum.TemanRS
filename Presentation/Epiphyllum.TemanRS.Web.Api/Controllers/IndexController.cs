@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Epiphyllum.TemanRS.Core.Filters;
 using Epiphyllum.TemanRS.Core.Localization.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Controllers
         }
 
         [HttpGet]
+        [ApiWrapper(Skip = true)]
         public string Get()
         {
             return _stringLocalizer[Message.Hello];

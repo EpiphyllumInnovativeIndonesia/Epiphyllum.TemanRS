@@ -7,11 +7,9 @@ using Epiphyllum.TemanRS.Core.Helpers;
 using Epiphyllum.TemanRS.Core.Infrastructures;
 using Epiphyllum.TemanRS.Core.Infrastructures.Exceptions;
 using Epiphyllum.TemanRS.Core.Localization.Resources;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Localization;
-using Newtonsoft.Json;
 
 namespace Epiphyllum.TemanRS.Core.Filters
 {

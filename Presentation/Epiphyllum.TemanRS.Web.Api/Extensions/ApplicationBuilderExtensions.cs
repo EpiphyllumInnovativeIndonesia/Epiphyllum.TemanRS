@@ -25,7 +25,6 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             app.UseHsts();
             app.UseAuthentication();
             app.UseHttpsRedirection();
-            app.UseMiddleware<ApiResponseMiddleware>();
             app.UseMvc();
         }
 
@@ -48,7 +47,6 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
             };
 
             localizationOptions.RequestCultureProviders.Insert(0, new DefaultLocalizationProvider());
-            //localizationOptions.RequestCultureProviders.Insert(0, new UserLocalizationProvider());
             app.UseRequestLocalization(localizationOptions);
         }
     }

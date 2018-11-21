@@ -141,6 +141,10 @@
     <value>Permintaan ditolak.</value>
     <comment>Request denied.</comment>
   </data>
+  <data name="Unhandled" xml:space="preserve">
+    <value>Terdapat kesalahan yang tidak dapat ditangani.</value>
+    <comment>An unhandled error occurred.</comment>
+  </data>
   <data name="ValidationError" xml:space="preserve">
     <value>Terdapat kesalahan validasi dalam merespon permintaan.</value>
     <comment>Request responded with validation error(s).</comment>

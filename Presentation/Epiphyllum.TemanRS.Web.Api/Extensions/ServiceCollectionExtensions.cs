@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Epiphyllum.TemanRS.Core.Configuration;
+using Epiphyllum.TemanRS.Core.Filters;
 using Epiphyllum.TemanRS.Core.Infrastructures;
 using Epiphyllum.TemanRS.Core.Infrastructures.DependencyInjection;
 using Epiphyllum.TemanRS.Repositories.Data;
@@ -51,7 +52,10 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
         /// <param name="services">IServiceCollection</param>
         public static void ConfigureMvc(this IServiceCollection services)
         {
-            IMvcBuilder mvcBuilder = services.AddMvc();
+            IMvcBuilder mvcBuilder = services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ApiExceptionFilterAttribute));
+            });
             mvcBuilder.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             mvcBuilder.AddJsonOptions(options =>
             {

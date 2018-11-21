@@ -135,6 +135,9 @@
   <data name="Unauthorized" xml:space="preserve">
     <value>Request denied.</value>
   </data>
+  <data name="Unhandled" xml:space="preserve">
+    <value>An unhandled error occurred.</value>
+  </data>
   <data name="ValidationError" xml:space="preserve">
     <value>Request responded with validation error(s).</value>
   </data>

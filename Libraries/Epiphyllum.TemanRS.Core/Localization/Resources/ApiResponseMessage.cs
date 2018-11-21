@@ -49,5 +49,10 @@ namespace Epiphyllum.TemanRS.Core.Localization.Resources
         /// Gets the validation exception api response message
         /// </summary>
         public const string ValidationException = "ValidationException";
+
+        /// <summary>
+        /// Gets the unhandled exception api response message
+        /// </summary>
+        public const string Unhandled = "Unhandled";
     }
 }

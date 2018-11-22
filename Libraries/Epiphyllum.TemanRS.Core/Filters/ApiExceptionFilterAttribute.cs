@@ -56,6 +56,12 @@ namespace Epiphyllum.TemanRS.Core.Filters
                 apiError = new ApiError(responseMessage);
                 code = (int)HttpStatusCode.Unauthorized;
             }
+            else if (context.Exception is EpiphyllumException)
+            {
+                var ex = context.Exception as EpiphyllumException;
+                apiError = new ApiError(ex.Message);
+                code = ex.StatusCode;
+            }
             else
             {
 #if !DEBUG

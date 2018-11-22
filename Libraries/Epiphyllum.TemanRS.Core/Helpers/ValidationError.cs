@@ -8,7 +8,7 @@ namespace Epiphyllum.TemanRS.Core.Helpers
     /// <summary>
     /// Represents a validation error
     /// </summary>
-    public class ValidationError
+    public partial class ValidationError
     {
         /// <summary>
         /// Gets the validation error field

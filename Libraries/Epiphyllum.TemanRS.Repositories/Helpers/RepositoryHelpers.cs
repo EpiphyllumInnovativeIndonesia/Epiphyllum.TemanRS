@@ -11,7 +11,7 @@ namespace Epiphyllum.TemanRS.Repositories.Helpers
     /// <summary>
     /// Represents repository extensions
     /// </summary>
-    public static class RepositoryHelpers
+    public static partial class RepositoryHelpers
     {
         /// <summary>
         /// Includes navigation property related entity framework object

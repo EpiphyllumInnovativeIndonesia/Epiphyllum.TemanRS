@@ -12,7 +12,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
     /// Represents an api response
     /// </summary>
     [DataContract]
-    public class ApiResponse
+    public partial class ApiResponse
     {
         /// <summary>
         /// Gets the api response version

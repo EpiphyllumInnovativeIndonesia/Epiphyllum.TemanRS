@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Epiphyllum.TemanRS.Core.Infrastructures.DependencyInjection
 {
-    public interface IDependencyManagement
+    public partial interface IDependencyManagement
     {
         IServiceCollection ConfigureDependency(IServiceCollection services);
     }

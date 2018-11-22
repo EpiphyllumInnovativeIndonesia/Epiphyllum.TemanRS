@@ -13,7 +13,7 @@ namespace Epiphyllum.TemanRS.Core.Helpers
     /// <summary>
     /// Represents an api error
     /// </summary>
-    public class ApiError
+    public partial class ApiError
     {
         /// <summary>
         /// Gets or sets the api error is error

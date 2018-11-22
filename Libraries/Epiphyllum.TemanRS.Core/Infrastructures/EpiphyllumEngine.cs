@@ -16,7 +16,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
     /// <summary>
     /// Represents Epiphyllum engine
     /// </summary>
-    public class EpiphyllumEngine : IEngine
+    public partial class EpiphyllumEngine : IEngine
     {
         /// <summary>
         /// Gets or sets service provider

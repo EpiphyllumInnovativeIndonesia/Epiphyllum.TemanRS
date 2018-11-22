@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Configuration
     /// <summary>
     /// Represents a jwt authentication
     /// </summary>
-    public class JwtAuthentication
+    public partial class JwtAuthentication
     {
         /// <summary>
         /// Gets or sets the jwt authentication key

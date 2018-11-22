@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Localization.Resources
     /// <summary>
     /// Represents an attribute message
     /// </summary>
-    public class AttributeMessage
+    public partial class AttributeMessage
     {
         /// <summary>
         /// Gets the required attribute message

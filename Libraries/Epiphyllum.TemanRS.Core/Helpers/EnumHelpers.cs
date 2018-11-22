@@ -9,7 +9,7 @@ namespace Epiphyllum.TemanRS.Core.Helpers
     /// <summary>
     /// Represents an enum helpers
     /// </summary>
-    public static class EnumHelpers
+    public static partial class EnumHelpers
     {
         /// <summary>
         /// Get description from convertible class (e.g. <see cref="Enum"/>)

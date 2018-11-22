@@ -9,7 +9,7 @@ namespace Epiphyllum.TemanRS.Core.Helpers
     /// <summary>
     /// Represents a json helpers
     /// </summary>
-    public static class JsonHelpers
+    public static partial class JsonHelpers
     {
         /// <summary>
         /// Determine the json object is a valid json

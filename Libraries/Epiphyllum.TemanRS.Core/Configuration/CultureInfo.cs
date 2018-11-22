@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Configuration
     /// <summary>
     /// Represents a culture info
     /// </summary>
-    public class CultureInfo
+    public partial class CultureInfo
     {
         /// <summary>
         /// Gets or sets the default culture info

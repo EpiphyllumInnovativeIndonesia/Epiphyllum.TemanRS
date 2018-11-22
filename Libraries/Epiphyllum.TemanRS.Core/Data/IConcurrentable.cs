@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Data
     /// <summary>
     /// Interface for concurrentable entities
     /// </summary>
-    public interface IConcurrentable
+    public partial interface IConcurrentable
     {
         /// <summary>
         /// Gets or sets the entity row version

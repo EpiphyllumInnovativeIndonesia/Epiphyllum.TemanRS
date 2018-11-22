@@ -12,7 +12,7 @@ namespace Epiphyllum.TemanRS.Repositories.Helpers
     /// <summary>
     /// Represents context helpers
     /// </summary>
-    public static class ContextHelpers
+    public static partial class ContextHelpers
     {
         /// <summary>
         /// Audit db context

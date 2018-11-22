@@ -8,7 +8,7 @@ namespace Epiphyllum.TemanRS.Core.Localization.Resources
     /// <summary>
     /// Represents an api response message
     /// </summary>
-    public class ApiResponseMessage
+    public partial class ApiResponseMessage
     {
         /// <summary>
         /// Gets the success api response message

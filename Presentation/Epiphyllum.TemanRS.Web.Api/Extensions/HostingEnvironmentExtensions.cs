@@ -11,7 +11,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
     /// <summary>
     /// Represents extensions of IHostingEnvironment
     /// </summary>
-    public static class HostingEnvironmentExtensions
+    public static partial class HostingEnvironmentExtensions
     {
         /// <summary>
         /// Build custom configuration

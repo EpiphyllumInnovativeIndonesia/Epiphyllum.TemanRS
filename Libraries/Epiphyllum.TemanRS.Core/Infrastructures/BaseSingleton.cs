@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
     /// <summary>
     /// Provides access to all "singletons" stored by <see cref="Singleton{T}"/>.
     /// </summary>
-    public class BaseSingleton
+    public partial class BaseSingleton
     {
         static BaseSingleton()
         {

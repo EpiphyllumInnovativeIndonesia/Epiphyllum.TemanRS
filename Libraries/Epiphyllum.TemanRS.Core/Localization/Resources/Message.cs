@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Localization.Resources
     /// <summary>
     /// Represents a message
     /// </summary>
-    public class Message
+    public partial class Message
     {
         /// <summary>
         /// Gets the hello message

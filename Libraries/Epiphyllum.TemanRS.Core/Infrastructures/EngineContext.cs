@@ -8,7 +8,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
     /// <summary>
     /// Provides access to the singleton instance of the Nop engine.
     /// </summary>
-    public class EngineContext
+    public partial class EngineContext
     {
         /// <summary>
         /// Create a static instance of the Nop engine.

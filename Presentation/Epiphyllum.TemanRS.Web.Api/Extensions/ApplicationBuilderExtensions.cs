@@ -12,7 +12,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
     /// <summary>
     /// Represents extensions of IApplicationBuilder
     /// </summary>
-    public static class ApplicationBuilderExtensions
+    public static partial class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Configure custom application builder

@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Data
     /// <summary>
     /// Interface for auditable entities
     /// </summary>
-    public interface IAuditable
+    public partial interface IAuditable
     {
         /// <summary>
         /// Gets or sets the entity deleted is true or false

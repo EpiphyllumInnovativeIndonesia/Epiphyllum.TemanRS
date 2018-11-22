@@ -11,7 +11,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
     /// </summary>
     /// <typeparam name="T">The type of object to store.</typeparam>
     /// <remarks>Access to the instance is not synchronized.</remarks>
-    public class Singleton<T> : BaseSingleton
+    public partial class Singleton<T> : BaseSingleton
     {
         private static T instance;
 

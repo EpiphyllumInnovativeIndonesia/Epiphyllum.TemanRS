@@ -15,7 +15,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data
     /// <summary>
     /// Represents a user manager
     /// </summary>
-    public class UserManager : IUserManager
+    public partial class UserManager : IUserManager
     {
         private readonly IHttpContextAccessor _httpContext;
         private string _username;

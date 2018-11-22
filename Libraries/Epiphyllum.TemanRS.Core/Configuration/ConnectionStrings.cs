@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Configuration
     /// <summary>
     /// Represents connection strings
     /// </summary>
-    public class ConnectionStrings
+    public partial class ConnectionStrings
     {
         /// <summary>
         /// Gets or sets the default connection strings

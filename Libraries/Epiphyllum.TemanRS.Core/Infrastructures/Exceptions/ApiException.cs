@@ -8,7 +8,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures.Exceptions
     /// <summary>
     /// Represents an api exception
     /// </summary>
-    public class ApiException : Exception
+    public partial class ApiException : Exception
     {
         /// <summary>
         /// Gets or sets the api exception status code

@@ -9,7 +9,7 @@ namespace Epiphyllum.TemanRS.Core.Helpers
     /// <summary>
     /// Represents a password hasher
     /// </summary>
-    public interface IPasswordHasher : IRegisterSingleton
+    public partial interface IPasswordHasher : IRegisterSingleton
     {
         /// <summary>
         /// Returns a hashed representation of the supplied <paramref name="password"/>

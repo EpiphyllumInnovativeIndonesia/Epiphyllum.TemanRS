@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
     /// <summary>
     /// Represents a user manager
     /// </summary>
-    public interface IUserManager : IRegisterScoped
+    public partial interface IUserManager : IRegisterScoped
     {
         /// <summary>
         /// Gets or sets the user manager user id

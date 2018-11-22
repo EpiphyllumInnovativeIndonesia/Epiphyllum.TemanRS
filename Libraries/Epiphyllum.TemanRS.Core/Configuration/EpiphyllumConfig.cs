@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Configuration
     /// <summary>
     /// Represents startup epiphyllum configuration parameters
     /// </summary>
-    public class EpiphyllumConfig
+    public partial class EpiphyllumConfig
     {
         /// <summary>
         /// Gets or sets the epiphyllum connection strings

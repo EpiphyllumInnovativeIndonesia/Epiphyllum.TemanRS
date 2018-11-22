@@ -24,7 +24,7 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
     /// <summary>
     /// Represents extensions of IServiceCollection
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         /// <summary>
         /// Add services to the application and configure service provider

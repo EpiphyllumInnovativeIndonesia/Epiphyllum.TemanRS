@@ -7,7 +7,7 @@ namespace Epiphyllum.TemanRS.Core.Infrastructures
     /// <summary>
     /// Objects which derived from this interface will be registered as transient service in dependency injection container
     /// </summary>
-    public interface IRegisterTransient
+    public partial interface IRegisterTransient
     {
     }
 }

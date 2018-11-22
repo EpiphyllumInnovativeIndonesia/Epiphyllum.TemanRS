@@ -14,7 +14,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data
     /// Represents the Entity Framework repository
     /// </summary>
     /// <typeparam name="TEntity">Entity type</typeparam>
-    public partial class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public partial class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity, new()
     {
         private readonly IDbContext _context;
         private DbSet<TEntity> _entities;
@@ -118,7 +118,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data
         {
             return await TableNoTracking
                 .Where(predicate)
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync() ?? new TEntity();
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data
             return await TableNoTracking
                 .Where(predicate)
                 .IncludeProperties(navigationProperties)
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync() ?? new TEntity();
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data
             return await TableNoTracking
                 .Where(predicate)
                 .IncludeProperties(navigationProperties)
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync() ?? new TEntity();
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Epiphyllum.TemanRS.Repositories.Data
         /// <returns>Task Entity</returns>
         public virtual async Task<TEntity> SelectById(object id)
         {
-            return await _entities.FindAsync(id);
+            return await _entities.FindAsync(id) ?? new TEntity();
         }
 
         /// <summary>

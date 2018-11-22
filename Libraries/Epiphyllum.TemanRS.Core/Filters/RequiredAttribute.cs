@@ -39,6 +39,15 @@ namespace Epiphyllum.TemanRS.Core.Filters
                 return new ValidationResult(errorMessage);
             }
 
+            if (value is string valueString)
+            {
+                if (string.IsNullOrWhiteSpace(valueString))
+                {
+                    var errorMessage = FormatErrorMessage(validationContext.DisplayName);
+                    return new ValidationResult(errorMessage);
+                }
+            }
+
             return ValidationResult.Success;
         }
 

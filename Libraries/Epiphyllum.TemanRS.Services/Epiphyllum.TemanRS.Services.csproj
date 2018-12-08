@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Epiphyllum.TemanRS.Core\Epiphyllum.TemanRS.Core.csproj" />
     <ProjectReference Include="..\Epiphyllum.TemanRS.Repositories\Epiphyllum.TemanRS.Repositories.csproj" />
   </ItemGroup>

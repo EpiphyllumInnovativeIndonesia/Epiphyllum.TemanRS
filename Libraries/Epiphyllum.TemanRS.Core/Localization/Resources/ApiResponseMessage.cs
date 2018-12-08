@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Epiphyllum.TemanRS.Core.Enums;
-
-namespace Epiphyllum.TemanRS.Core.Localization.Resources
+﻿namespace Epiphyllum.TemanRS.Core.Localization.Resources
 {
     /// <summary>
     /// Represents an api response message

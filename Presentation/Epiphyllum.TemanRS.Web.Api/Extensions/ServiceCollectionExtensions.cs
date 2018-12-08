@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Core.Configuration;
+using Epiphyllum.TemanRS.Core;
 using Epiphyllum.TemanRS.Core.Filters;
-using Epiphyllum.TemanRS.Core.Infrastructures;
-using Epiphyllum.TemanRS.Core.Infrastructures.DependencyInjection;
-using Epiphyllum.TemanRS.Repositories.Data;
-using Epiphyllum.TemanRS.Services.Accounts;
+using Epiphyllum.TemanRS.Core.Providers;
+using Epiphyllum.TemanRS.Repositories.DbManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -94,7 +92,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
                 var key = Encoding.ASCII.GetBytes(config.Key);
                 jwt.RequireHttpsMetadata = false;
                 jwt.SaveToken = true;
-                jwt.TokenValidationParameters = new TokenValidationParameters {
+                jwt.TokenValidationParameters = new TokenValidationParameters
+                {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,

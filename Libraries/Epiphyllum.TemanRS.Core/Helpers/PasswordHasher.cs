@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
-using System.Text;
+using Epiphyllum.TemanRS.Core.Abstractions;
 using Epiphyllum.TemanRS.Core.Enums;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
@@ -17,9 +16,9 @@ namespace Epiphyllum.TemanRS.Core.Helpers
     {
         private readonly int _iterCount;
         private readonly RandomNumberGenerator _rng;
-        private readonly CommonHelpers _commonHelpers;
+        private readonly ICommonHelpers _commonHelpers;
 
-        public PasswordHasher(CommonHelpers commonHelpers, IOptions<PasswordHasherOptions> optionsAccessor = null)
+        public PasswordHasher(ICommonHelpers commonHelpers, IOptions<PasswordHasherOptions> optionsAccessor = null)
         {
             var options = optionsAccessor?.Value ?? new PasswordHasherOptions();
 

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Repositories.Domain.Accounts;
-using Epiphyllum.TemanRS.Services.Accounts;
-using Microsoft.AspNetCore.Http;
+using Epiphyllum.TemanRS.Repositories.Entity;
+using Epiphyllum.TemanRS.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Epiphyllum.TemanRS.Web.Api.Controllers.Accounts

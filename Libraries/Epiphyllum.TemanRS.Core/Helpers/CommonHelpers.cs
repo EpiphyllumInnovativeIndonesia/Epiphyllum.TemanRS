@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using Epiphyllum.TemanRS.Core.Infrastructures;
+﻿using System.Text.RegularExpressions;
+using Epiphyllum.TemanRS.Core.Abstractions;
 
 namespace Epiphyllum.TemanRS.Core.Helpers
 {
     /// <summary>
     /// Represents a common helpers
     /// </summary>
-    public partial class CommonHelpers : IRegisterSingleton
+    public partial class CommonHelpers : ICommonHelpers
     {
         private const string _encodedPattern = @"^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
 

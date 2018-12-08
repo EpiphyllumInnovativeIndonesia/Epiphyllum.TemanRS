@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Epiphyllum.TemanRS.Core.Data;
-using Epiphyllum.TemanRS.Core.Infrastructures;
-using Epiphyllum.TemanRS.Repositories.Domain;
+using Epiphyllum.TemanRS.Core;
+using Epiphyllum.TemanRS.Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Epiphyllum.TemanRS.Repositories.Helpers

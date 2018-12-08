@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using Epiphyllum.TemanRS.Core.Infrastructures;
 using Epiphyllum.TemanRS.Core.Localization.Resources;
 using Microsoft.Extensions.Localization;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Epiphyllum.TemanRS.Core.Infrastructures
+﻿namespace Epiphyllum.TemanRS.Core.Infrastructures
 {
     /// <summary>
     /// A statically compiled "singleton" used to store objects throughout the 

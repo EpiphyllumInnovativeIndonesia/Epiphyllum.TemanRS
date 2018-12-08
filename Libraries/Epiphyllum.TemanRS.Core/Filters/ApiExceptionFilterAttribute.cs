@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Core.Helpers;
-using Epiphyllum.TemanRS.Core.Infrastructures;
-using Epiphyllum.TemanRS.Core.Infrastructures.Exceptions;
+using Epiphyllum.TemanRS.Core.Exceptions;
 using Epiphyllum.TemanRS.Core.Localization.Resources;
+using Epiphyllum.TemanRS.Core.Providers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Localization;
@@ -43,10 +41,12 @@ namespace Epiphyllum.TemanRS.Core.Filters
             if (context.Exception is ApiException)
             {
                 var ex = context.Exception as ApiException;
-                apiError = new ApiError(ex.Message);
-                apiError.ValidationErrors = ex.Errors;
-                apiError.ReferenceErrorCode = ex.ReferenceErrorCode;
-                apiError.ReferenceDocumentLink = ex.ReferenceDocumentLink;
+                apiError = new ApiError(ex.Message)
+                {
+                    ValidationErrors = ex.Errors,
+                    ReferenceErrorCode = ex.ReferenceErrorCode,
+                    ReferenceDocumentLink = ex.ReferenceDocumentLink
+                };
                 code = ex.StatusCode;
 
             }
@@ -72,8 +72,10 @@ namespace Epiphyllum.TemanRS.Core.Filters
                 string stack = context.Exception.StackTrace;
 #endif
 
-                apiError = new ApiError(msg);
-                apiError.Details = stack;
+                apiError = new ApiError(msg)
+                {
+                    Details = stack
+                };
                 code = (int)HttpStatusCode.InternalServerError;
 
             }

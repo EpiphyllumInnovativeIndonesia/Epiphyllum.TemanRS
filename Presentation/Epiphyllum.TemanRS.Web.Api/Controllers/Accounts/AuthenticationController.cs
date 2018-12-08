@@ -5,13 +5,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Epiphyllum.TemanRS.Core.Infrastructures;
-using Epiphyllum.TemanRS.Services.Accounts;
+using Epiphyllum.TemanRS.Core;
+using Epiphyllum.TemanRS.Core.Abstractions;
+using Epiphyllum.TemanRS.Services.Abstractions;
 using Epiphyllum.TemanRS.Web.Api.Models.Accounts;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Epiphyllum.TemanRS.Web.Api.Controllers.Accounts
 {

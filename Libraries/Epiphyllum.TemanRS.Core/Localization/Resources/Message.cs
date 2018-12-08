@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Epiphyllum.TemanRS.Core.Localization.Resources
+﻿namespace Epiphyllum.TemanRS.Core.Localization.Resources
 {
     /// <summary>
     /// Represents a message

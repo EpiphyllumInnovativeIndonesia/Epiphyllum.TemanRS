@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace Epiphyllum.TemanRS.Core.Tests.Fake
+namespace Epiphyllum.TemanRS.Unit.Tests.Fake
 {
     public enum FakeEnum
     {

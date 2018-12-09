@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Epiphyllum.TemanRS.Core;
 using Epiphyllum.TemanRS.Core.Abstractions;
 using Epiphyllum.TemanRS.Core.Enums;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Epiphyllum.TemanRS.Core.Tests
+namespace Epiphyllum.TemanRS.Unit.Tests
 {
     public class EngineTests
     {
@@ -27,14 +28,6 @@ namespace Epiphyllum.TemanRS.Core.Tests
             var engine = EngineContext.Create();
             engine.Initialize(services);
             engine.ConfigureServices(services, configuration);
-        }
-
-        [Fact]
-        public void Engine_null_by_default()
-        {
-            var engine = EngineContext.Current as CoreEngine;
-
-            Assert.Null(engine.ServiceProvider);
         }
 
         [Fact]

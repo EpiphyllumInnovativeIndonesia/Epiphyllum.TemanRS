@@ -3,7 +3,7 @@ using System.Text;
 using Epiphyllum.TemanRS.Core.Helpers;
 using Xunit;
 
-namespace Epiphyllum.TemanRS.Core.Tests.Helpers
+namespace Epiphyllum.TemanRS.Unit.Tests.Helpers
 {
     public class CommonHelpersTests
     {

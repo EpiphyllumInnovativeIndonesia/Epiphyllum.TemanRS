@@ -4,7 +4,7 @@ using System.Text;
 using Epiphyllum.TemanRS.Core.Infrastructures;
 using Xunit;
 
-namespace Epiphyllum.TemanRS.Core.Tests
+namespace Epiphyllum.TemanRS.Unit.Tests
 {
     public class SingletonTests
     {

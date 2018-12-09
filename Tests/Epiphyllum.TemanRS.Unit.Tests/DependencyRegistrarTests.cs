@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Epiphyllum.TemanRS.Core.Tests
+namespace Epiphyllum.TemanRS.Unit.Tests
 {
     public class DependencyRegistrarTests
     {

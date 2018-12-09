@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Epiphyllum.TemanRS.Core.Helpers;
-using Epiphyllum.TemanRS.Core.Tests.Fake;
+using Epiphyllum.TemanRS.Unit.Tests.Fake;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Epiphyllum.TemanRS.Core.Tests.Helpers
+namespace Epiphyllum.TemanRS.Unit.Tests.Helpers
 {
     public class JsonHelpersTests
     {

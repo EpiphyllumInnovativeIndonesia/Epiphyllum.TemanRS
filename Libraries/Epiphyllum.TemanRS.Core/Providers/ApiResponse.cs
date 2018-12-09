@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -9,7 +10,7 @@ namespace Epiphyllum.TemanRS.Core.Providers
     /// Represents an api response
     /// </summary>
     [DataContract]
-    public partial class ApiResponse
+    public partial class ApiResponse<TModel>
     {
         /// <summary>
         /// Gets the api response version
@@ -52,10 +53,10 @@ namespace Epiphyllum.TemanRS.Core.Providers
         /// Gets or sets the api response result
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
-        public object Result { get; set; }
+        public TModel Result { get; set; }
 
         [JsonConstructor]
-        public ApiResponse(int statusCode, List<string> message = null, object result = null, ApiError apiError = null)
+        public ApiResponse(int statusCode, TModel result, List<string> message = null, ApiError apiError = null)
         {
             StatusCode = statusCode;
             IsSuccess = apiError == null;

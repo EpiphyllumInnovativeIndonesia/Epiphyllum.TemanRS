@@ -259,9 +259,9 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/Epiphyllum.TemanRS.Common/ConnectionStrings.json
+
+#
 /corefx.vssettings
-/Libraries/Epiphyllum.TemanRS.Repositories/connectionstrings.json
-/Presentation/Epiphyllum.TemanRS.Web.Api/appsettings.Development.json
 /Libraries/Epiphyllum.TemanRS.Repositories/Migrations
-/Libraries/Epiphyllum.TemanRS.Repositories/Data/Seeding
+/Presentation/Epiphyllum.TemanRS.Web.Api/appsettings.Development.json
+/Tests/Epiphyllum.TemanRS.Integration.Tests/appsettings.Production.json

@@ -104,7 +104,7 @@ namespace Epiphyllum.TemanRS.Core.Filters
         {
             string bodyText;
             string jsonString;
-            ApiResponse apiResponse;
+            ApiResponse<object> apiResponse;
             List<string> apiMessage = new List<string>();
 
             string responseMessage = _stringLocalizer[ApiResponseMessage.Success];
@@ -124,16 +124,16 @@ namespace Epiphyllum.TemanRS.Core.Filters
             Type type = bodyContent?.GetType();
             if (type.Equals(typeof(Newtonsoft.Json.Linq.JObject)))
             {
-                apiResponse = JsonConvert.DeserializeObject<ApiResponse>(bodyText);
+                apiResponse = JsonConvert.DeserializeObject<ApiResponse<object>>(bodyText);
 
                 if (apiResponse.Result == null)
                 {
-                    apiResponse = new ApiResponse(code, apiMessage, bodyContent, null);
+                    apiResponse = new ApiResponse<object>(code, bodyContent, apiMessage, null);
                 }
             }
             else
             {
-                apiResponse = new ApiResponse(code, apiMessage, bodyContent, null);
+                apiResponse = new ApiResponse<object>(code, bodyContent, apiMessage, null);
             }
 
             jsonString = JsonConvert.SerializeObject(apiResponse);
@@ -153,7 +153,7 @@ namespace Epiphyllum.TemanRS.Core.Filters
             string responseMessage;
             string jsonString;
             ApiError apiError;
-            ApiResponse apiResponse;
+            ApiResponse<object> apiResponse;
             List<string> apiMessage = new List<string>();
 
             if (!body.ToString().IsValidJson())
@@ -197,7 +197,7 @@ namespace Epiphyllum.TemanRS.Core.Filters
 
             responseMessage = _stringLocalizer[ApiResponseMessage.Failure];
             apiMessage.Add(responseMessage);
-            apiResponse = new ApiResponse(code, apiMessage, null, apiError);
+            apiResponse = new ApiResponse<object>(code, null, apiMessage, apiError);
             jsonString = JsonConvert.SerializeObject(apiResponse);
 
             context.Response.StatusCode = code;

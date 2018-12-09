@@ -33,7 +33,7 @@ namespace Epiphyllum.TemanRS.Core.Filters
             await base.OnExceptionAsync(context);
 
             ApiError apiError;
-            ApiResponse apiResponse;
+            ApiResponse<object> apiResponse;
             List<string> apiMessage = new List<string>();
             int code = 0;
             string responseMessage = string.Empty;
@@ -82,7 +82,7 @@ namespace Epiphyllum.TemanRS.Core.Filters
 
             responseMessage = _stringLocalizer[ApiResponseMessage.Exception];
             apiMessage.Add(responseMessage);
-            apiResponse = new ApiResponse(code, apiMessage, null, apiError);
+            apiResponse = new ApiResponse<object>(code, null, apiMessage, apiError);
 
             context.HttpContext.Response.StatusCode = code;
             context.Result = new JsonResult(apiResponse);

@@ -39,7 +39,8 @@ namespace Epiphyllum.TemanRS.Web.Api.Extensions
                 new CultureInfo("id-ID"),
             };
 
-            RequestLocalizationOptions localizationOptions = new RequestLocalizationOptions {
+            RequestLocalizationOptions localizationOptions = new RequestLocalizationOptions
+            {
                 DefaultRequestCulture = new RequestCulture("en-US"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures

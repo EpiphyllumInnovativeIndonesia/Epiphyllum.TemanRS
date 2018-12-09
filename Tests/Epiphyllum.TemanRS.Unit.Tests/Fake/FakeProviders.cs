@@ -1,6 +1,6 @@
 ﻿using Epiphyllum.TemanRS.Core.Providers;
 
-namespace Epiphyllum.TemanRS.Core.Tests.Fake
+namespace Epiphyllum.TemanRS.Unit.Tests.Fake
 {
     public class FakeProviders
     {
